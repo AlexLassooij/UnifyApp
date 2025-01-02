@@ -5,7 +5,9 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 clone this repository, open a terminal (in vscode)
+
 navigate to the root directory, run `npm install`
+
 I'm not sure if you guys have used Node (needed to use npm (Node Package Manager)) before but you'd need to have that installed first, I'd recommend using NVM (node version manager)
 
 First, run the development server:
