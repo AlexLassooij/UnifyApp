@@ -24,7 +24,8 @@ export default function Home() {
           <CardContent>
             <div className="space-y-4">
               {deadlines.map((deadline, i) => (
-                <div key={i} className="flex items-start justify-between gap-4 border-b pb-4 last:border-0">
+                // flex items-start justify-between gap-4 border-b pb-4 last:border-0"
+                <div key={i} className="flex items-start justify-between gap-4 pb-4">
                   <div className="flex gap-3">
                     <Image
                       src={"/next.svg"}
@@ -33,13 +34,13 @@ export default function Home() {
                       height={40}
                       className="rounded"
                     />
-                    <div>
-                      <p className="font-medium">{deadline.details}</p>
-                      <p className="text-sm text-muted-foreground">{deadline.institution}</p>
+                    {/* max-h-14 is 56px, as defined in the figma design */}
+                    <div className="max-h-14 overflow-hidden">
+                      <p className="font-medium line-clamp-2">{deadline.details}</p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-medium">{deadline.date}</p>
+                  <div className="flex justify-between gap-2 text-center">
+                    <p className="text-sm">{deadline.date}</p>
                     <p className="text-sm text-red-500">{deadline.daysLeft} Days</p>
                   </div>
                 </div>
@@ -66,7 +67,7 @@ export default function Home() {
           <CardContent>
             <div className="space-y-4">
               {messages.map((message, i) => (
-                <div key={i} className="flex items-start justify-between gap-4 border-b pb-4 last:border-0">
+                <div key={i} className="flex items-start justify-between gap-4 pb-4">
                   <div className="flex gap-3">
                     <Image
                       src={"/next.svg"}
@@ -105,7 +106,7 @@ export default function Home() {
           <CardContent>
             <div className="space-y-4">
               {applications.map((app, i) => (
-                <div key={i} className="flex items-start justify-between gap-4 border-b pb-4 last:border-0">
+                <div key={i} className="flex items-start justify-between gap-4 pb-4">
                   <div className="flex gap-3">
                     <Image
                       src={"/next.svg"}
@@ -144,7 +145,7 @@ export default function Home() {
           <CardContent>
             <div className="space-y-4">
               {saved.map((item, i) => (
-                <div key={i} className="flex items-start justify-between gap-4 border-b pb-4 last:border-0">
+                <div key={i} className="flex items-start justify-between gap-4 pb-4">
                   <div className="flex gap-3">
                     <Image
                       src={"/next.svg"}

@@ -1,4 +1,4 @@
-import "@/app/globals.scss";
+import "@/app/globals.css";
 
 export default function LoginLayout({
   children,

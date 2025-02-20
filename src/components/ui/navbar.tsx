@@ -15,17 +15,17 @@ export default function Navbar() {
     { name: "Forums", href: "/forums", icon: Users2 },
     { name: "Search", href: "/search", icon: Search },
     { name: "Settings", href: "/settings", icon: Settings },
-  ]
+  ]  
 
   return (
-    <div className="w-[200px] bg-[#c0dce9] p-4 flex flex-col gap-4">
+    <div className="w-[192px] bg-[#c0dce9] h-screen sticky top-0 overflow-y-auto flex flex-col justify-between p-8">
       {navigation.map((item) => {
         const isActive = pathname === item.href
         return (
           <Link
             key={item.name}
             href={item.href}
-            className={`flex items-center gap-3 p-2 rounded-lg text-[#191919] hover:bg-white/50 transition-colors ${
+            className={`flex flex-col text-lg font-[500] items-center gap-3 py-4 px-0 rounded-lg text-[#191919] hover:bg-white/50 transition-colors ${
               isActive ? "bg-white/30" : ""
             }`}
           >
