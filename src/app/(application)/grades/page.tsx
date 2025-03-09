@@ -30,17 +30,8 @@ interface UniversityOptionProps {
   name: string
 }
 
+// TODO : add delete option
 export default function GradesOverview() {
-  const [selectedGrades, setSelectedGrades] = useState<Set<string>>(new Set())
-  const [courseSubjects, setCourseSubjects] = useState<Course[]>([])
-  const [selectedCourse, setSelectedCourse] = useState("")
-  const [academicYear, setAcademicYear] = useState<string>("24 / 25")
-
-  const [grades, setGrades] = useState<GradeData[]>([])
-  const [isLoadingGrades, setIsLoadingGrades] = useState(true)
-
-  const { user } = useUserStore()
-
   const defaultNewGrade: Omit<UserGrade, 'curriculum_type'> = {
     course_code: "",
     subject: "",
@@ -48,12 +39,51 @@ export default function GradesOverview() {
     completed: "in_progress",
     year: "24 / 25"
   }
-
+  
+  // list of id's
+  const [selectedGrades, setSelectedGrades] = useState<Set<string>>(new Set())
+  
+  // state for adding new grade
+  const [courseSubjects, setCourseSubjects] = useState<Course[]>([])
+  const [selectedCourse, setSelectedCourse] = useState("")
+  const [academicYear, setAcademicYear] = useState<string>("24 / 25")
+  const [grades, setGrades] = useState<GradeData[]>([])
   const [newGrade, setNewGrade] = useState<typeof defaultNewGrade>(defaultNewGrade);
+
+
+  // loading states
+  const [isLoadingGrades, setIsLoadingGrades] = useState(true)
+  const [isAddingGrade, setIsAddingGrade] = useState(false);
+  
+  // user state
+  const { user } = useUserStore()
+
 
   const academicYears = ["23 / 24", "24 / 25", "25 / 26"]
   
-  const [isAddingGrade, setIsAddingGrade] = useState(false);
+  // Update the course selection to set both course_code and subject
+  const handleCourseSelect = (courseCode: string) => {
+    setSelectedCourse(courseCode);
+    const selectedCourse = courseSubjects.find(course => course.course_code === courseCode);
+    
+    setNewGrade(prev => ({
+      ...prev,
+      course_code: courseCode,
+      subject: selectedCourse?.subject || ""
+    }));
+  };
+
+  // Update the course selection to set both course_code and subject
+  const handleAcademicYearSelect = (academicYear: string) => {
+    setAcademicYear(academicYear);
+    
+    setNewGrade(prev => ({
+      ...prev,
+      year: academicYear
+    }));
+  };
+  
+  // API call handlers
   
   // Add this function to handle grade submission
   const handleAddGrade = async () => {    
@@ -84,30 +114,7 @@ export default function GradesOverview() {
       setIsAddingGrade(false);
     }
   };
-  
-  // Update the course selection to set both course_code and subject
-  const handleCourseSelect = (courseCode: string) => {
-    setSelectedCourse(courseCode);
-    const selectedCourse = courseSubjects.find(course => course.course_code === courseCode);
-    
-    setNewGrade(prev => ({
-      ...prev,
-      course_code: courseCode,
-      subject: selectedCourse?.subject || ""
-    }));
-  };
 
-  // Update the course selection to set both course_code and subject
-  const handleAcademicYearSelect = (academicYear: string) => {
-    setAcademicYear(academicYear);
-    
-    setNewGrade(prev => ({
-      ...prev,
-      year: academicYear
-    }));
-  };
-
-  
   
 
   const fetchUserGrades = async (userId: string) => {
@@ -211,15 +218,15 @@ export default function GradesOverview() {
   }, [grades, selectedGrades])
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] overflow-hidden"> {/* Adjusted height */}
+    <div className="flex h-full overflow-hidden"> {/* Adjusted height */}
       {/* Main Content */}
-      <div className="flex-1 bg-[#f3f3f3] p-6 overflow-hidden flex flex-col">
+      <div className="flex-1 bg-[#f3f3f3] overflow-hidden flex flex-col">
         <h1 className="text-4xl font-bold mb-4"> {/* Reduced margin */}
           Grades Overview
         </h1>
 
-        <div className="flex flex-1 space-x-6 overflow-hidden">
-          {/* Left Column - Filters and Table */}
+        <div className="flex flex-col lg:flex-row flex-1 space-y-4 lg:space-y-0 lg:space-x-6 overflow-hidden">
+        {/* Left Column - Filters and Table */}
           <div className="flex-1 flex flex-col space-y-4 overflow-hidden"> {/* Reduced spacing */}
             {/* Add New Grade */}
             <Card className="shrink-0">
@@ -402,8 +409,8 @@ export default function GradesOverview() {
           </div>
 
           {/* Right Column - Grade Format and University Selection */}
-          <div className="w-[200px] space-y-4 flex flex-col"> {/* Reduced width and spacing */}
-            {/* Grade Format */}
+          <div className="w-full lg:w-[200px] flex flex-col"> {/* Responsive width */}
+          {/* Grade Format */}
 
             {/* University Selection */}
             <Card className="flex-1 overflow-hidden flex flex-col">
@@ -423,12 +430,7 @@ export default function GradesOverview() {
                 </div>
 
                 <div className="mt-3"> {/* Reduced margin */}
-                  <div className="flex justify-end mb-2"> {/* Reduced margin */}
-                    <Button variant="ghost" size="sm" className="flex items-center text-xs h-7"> {/* Reduced size */}
-                      View All
-                      <ChevronRight className="ml-1 h-3 w-3" /> {/* Reduced size */}
-                    </Button>
-                  </div>
+                
 
                   <Separator className="mb-3" /> {/* Reduced margin */}
 

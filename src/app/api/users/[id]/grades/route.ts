@@ -28,19 +28,16 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     
     const userData = userDoc.data();
     // Get the grades array from the user document
-    const userGrades = userData.grades || [];
+    const userGrades: UserGrade[] = userData.grades || [];
     
     // Format the grades for the frontend
-    const formattedGrades = userGrades.map((grade: UserGrade, index: number) => {
+    const formattedGrades = userGrades.map((grade, index: number) => {
       // Format the year (assuming it's stored as a date in Firestore)
       
 
       return {
         id: index.toString(), // Use grade ID or index as fallback
-        year: grade.year,
-        course: grade.course_code,
-        grade: grade.grade,
-        completed: grade.completed,
+        ...grade
       };
     });
     
