@@ -1,7 +1,7 @@
 import { SubheadingAndBulletPoints, SubheadingAndParagraph, SubheadingAndParagraphList, ParagraphList, TextField } from "../utility/text_types";
 
 export type GradeLetter = "A+" | "A" | "A-" | "B+" | "B" | "B-" | "C+" | "C" | "C-" | "D+" | "D" | "D-" | "F"
-export type Province = "AB" | "BC" | "MB" | "NB" | "NL" | "NS" | "NT" | "NU" | "ON" | "PE" | "QC" | "SK" | "YT"
+export type Province = "AB" | "BC" | "MB" | "NB" | "NL" | "NS" | "NT" | "NU" | "ON" | "PE" | "QC" | "SK" | "YT" | null
 export type CurriculumType = Province | "IB" | "AP";
 export type Subject = 
   | "english" | "math_algebra" | "math_calculus" | "math_foundation" | "biology" | "chemistry" | "physics" 
@@ -11,13 +11,14 @@ export type ApplicationOutcome = "pending" | "accepted" | "rejected" | "waitlist
 
 export interface Course {
   subject: string;
-  course_code: string[]; // will usually be one, e.g. Mathematics 30-1, but for subjects like social science there will be multiple. Use length of list, or another property to indicate whether the subject is singular or broad
+  course_code: string; // will usually be one, e.g. Mathematics 30-1, but for subjects like social science there will be multiple. Use length of list, or another property to indicate whether the subject is singular or broad
 }// maybe specify if one course is the 'primary' course, and the others are 'alternatives'
+// just one, make duplicates if needed, fetch all matching the subject if needed
 
 
 export interface Curriculum {
   curriculum_type: CurriculumType;
-  courses: Course[];
+  subjects: Course[];
 }
 
 export interface UserGrade {
@@ -25,25 +26,27 @@ export interface UserGrade {
   subject: string;
   course_code: string;
   grade: number;
-  grade_letter: GradeLetter
+  year: string;
+  completed: "in_progress" | "completed";
 }
 
 export interface User {
-  user_id: string;
+  id?: string
   name: string;
   email: string;
   high_school: string;
-  curriculum: string;
-  province: string;
-  saved_programs: [];
-  saved_universities: [];
-  recommended_programs: [];
-  recommended_universities: [];
+  curriculum: CurriculumType;
+  province: Province;
+  saved_programs: string[]; // FK, unique
+  saved_universities: string[]; // FK, unique
+  recommended_programs: string[]; // FK, unique
+  recommended_universities: string[]; // FK, unique
   grades: UserGrade[];
   // TODO : add user preferences
 }
     
 export interface University {
+  id?: string
   univesity_name: string;
   abbreviated_name: string;
   province: Province;
@@ -69,6 +72,7 @@ export interface University {
 }
 
 export interface Program {
+  id?: string
   university_id: string;
   faculty: string;
   program_name: string;
@@ -98,7 +102,7 @@ export interface Application {
     status: ApplicationStatus;
     deadline: Date;
     notes: string;
-  }
+  }[]
 }
 
     // {

@@ -1,6 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -17,5 +20,22 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app, "unify-database-main");
+const storage = getStorage(app);
 
-export { auth };
+
+const usersCollection = collection(db, "users");
+const programsCollection = collection(db, "programs");
+const universitiesCollection = collection(db, "universities");
+const curriculaCollection = collection(db, "curricula");
+export {
+  app,
+  db,
+  storage,
+  auth, 
+  firebaseConfig,
+  usersCollection,
+  programsCollection,
+  universitiesCollection,
+  curriculaCollection
+};
