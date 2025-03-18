@@ -363,7 +363,7 @@ export default function ComparePage() {
   return (
     <div className="flex min-h-screen bg-[#f3f3f3]">
             {/* Main Content */}
-      <div className="flex-1 p-8 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto">
         <h1 className="text-4xl font-bold mb-8">Compare University Programs</h1>
 
         {/* University Selection */}

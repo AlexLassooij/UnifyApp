@@ -104,7 +104,7 @@ export default function GradesOverview() {
         throw new Error(`API error: ${response.status}`);
       }
       // Refresh grades
-      await fetchUserGrades(user.id);
+      await fetchUserGrades(user?.id);
       
       setNewGrade(defaultNewGrade);
       
@@ -117,7 +117,12 @@ export default function GradesOverview() {
 
   
 
-  const fetchUserGrades = async (userId: string) => {
+  const fetchUserGrades = async (userId?: string) => {
+    if (!userId) {
+      console.log("No user ID available")
+      setIsLoadingGrades(false)
+      return
+    }
     setIsLoadingGrades(true)
     try {
       // Fetch grades from the API endpoint

@@ -1,15 +1,22 @@
-import { Paragraph } from './../utility/text_types';
 import { SubheadingAndBulletPoints, SubheadingAndParagraph, SubheadingAndParagraphList, ParagraphList, TextField } from "../utility/text_types";
 
 export type GradeLetter = "A+" | "A" | "A-" | "B+" | "B" | "B-" | "C+" | "C" | "C-" | "D+" | "D" | "D-" | "F"
-export type Province = "AB" | "BC" | "MB" | "NB" | "NL" | "NS" | "NT" | "NU" | "ON" | "PE" | "QC" | "SK" | "YT" | null
+export type Province = "AB" | "BC" | "MB" | "NB" | "NL" | "NS" | "NT" | "NU" | "ON" | "PE" | "QC" | "SK" | "YT" | "none";
 export type CurriculumType = Province | "IB" | "AP";
+export type FacultyType = "agriculture" | "applied_sciences" | "architecture" | "arts" | "biology" | "business" | "commerce" | "communication" | "computer_science" | "continuing_education" | "dentistry" | "education" | "engineering" | "environment" | "fine_arts" | "forestry" | "graduate_studies" | "health_sciences" | "humanities" | "information_technology" | "journalism" | "kinesiology" | "law" | "library_science" | "mathematics" | "media_studies" | "medicine" | "music" | "nursing" | "other" | "pharmacy" | "public_health" | "public_policy" | "science" | "social_sciences" | "social_work" | "veterinary_medicine";
 export type Subject = 
   | "english" | "math_algebra" | "math_calculus" | "math_foundation" | "biology" | "chemistry" | "physics" 
   | "social_studies" | "other_language" | "fine_art" | "other" | "physical_education"
 export type ApplicationStatus = "not_started" | "in_progress" | "completed" 
 export type ApplicationOutcome = "pending" | "accepted" | "rejected" | "waitlisted" | "deferred" | "withdrawn" | "cancelled" | "expired"
 export type DeadlineType = "early_admission" | "regular_admission" | "scholarship" | "international" | "other"
+
+export interface FacultyTypeOption {
+  value: FacultyType; // Lowercase with underscores for backend
+  label: string; // Display name
+}
+
+
 
 export interface Course {
   subject: Subject;
@@ -45,6 +52,10 @@ export interface User {
   recommended_universities: string[]; // FK, unique
   grades: UserGrade[];
   // TODO : add user preferences
+  program_match_scores: {
+    program_id: string;
+    score: number;
+  }[];
 }
     
 export interface University {
@@ -77,9 +88,12 @@ export interface University {
 }
 
 export interface Program {
-  university_id: string;
-  faculty: string;
+  id: string;
+  university_id: string
+  university_name: string
+  university_location: string;
   program_name: string;
+  faculty: FacultyType; // may have to define a type
   degree_type: string;
   annual_tuition: number;
   program_length: number;
@@ -102,6 +116,7 @@ export interface Program {
   }[];
   career_opportunities: SubheadingAndParagraph[];
   tldr: SubheadingAndBulletPoints[]
+  is_new?: boolean // Added for UI display
 }
 
 export interface Application {

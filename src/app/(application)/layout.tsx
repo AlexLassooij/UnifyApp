@@ -24,7 +24,7 @@ export default function AppLayout({
   return (
   <div id="application-layout-container" className="flex min-h-screen">
     <Navbar />
-    <main className="flex-1 bg-[#f3f3f3] p-8">{children}</main>
+    <main className="flex-1 bg-[#f3f3f3] p-12">{children}</main>
   </div>
   );
 }

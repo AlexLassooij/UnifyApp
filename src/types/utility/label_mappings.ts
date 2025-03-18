@@ -1,10 +1,85 @@
-import { GradeLetter, Province, CurriculumType, Subject, ApplicationStatus, ApplicationOutcome } from "../datamodel/datamodel";
+import { GradeLetter, Province, CurriculumType, Subject, ApplicationStatus, ApplicationOutcome, FacultyTypeOption } from "../datamodel/datamodel";
+
+export const provinceCities: Record<Exclude<Province, "none">, string[]> = {
+  ON: ["Toronto", "Ottawa", "Hamilton", "London", "Kingston", "Waterloo", "Guelph"],
+  QC: ["Montreal", "Quebec City", "Sherbrooke", "Trois-Rivieres"],
+  BC: ["Vancouver", "Victoria", "Kelowna", "Burnaby"],
+  AB: ["Calgary", "Edmonton", "Lethbridge"],
+  NS: ["Halifax", "Sydney"],
+  NB: ["Fredericton", "Saint John", "Moncton"],
+  MB: ["Winnipeg", "Brandon"],
+  SK: ["Saskatoon", "Regina"],
+  NL: ["St. John's", "Corner Brook"],
+  PE: ["Charlottetown"],
+  YT: ["Whitehorse"],
+  NT: ["Yellowknife"],
+  NU: ["Iqaluit"],
+}
+
+// Province display names
+export const provinceLabels: Record<Exclude<Province, "none">, string> = {
+  ON: "Ontario",
+  QC: "Quebec",
+  BC: "British Columbia",
+  AB: "Alberta",
+  NS: "Nova Scotia",
+  NB: "New Brunswick",
+  MB: "Manitoba",
+  SK: "Saskatchewan",
+  NL: "Newfoundland and Labrador",
+  PE: "Prince Edward Island",
+  YT: "Yukon",
+  NT: "Northwest Territories",
+  NU: "Nunavut",
+}
+
+export const facultyTypes: FacultyTypeOption[] = [
+  { value: "agriculture", label: "Agriculture" },
+  { value: "applied_sciences", label: "Applied Sciences" },
+  { value: "architecture", label: "Architecture" },
+  { value: "arts", label: "Arts" },
+  { value: "biology", label: "Biology" },
+  { value: "business", label: "Business" },
+  { value: "commerce", label: "Commerce" },
+  { value: "communication", label: "Communication" },
+  { value: "computer_science", label: "Computer Science" },
+  { value: "continuing_education", label: "Continuing Education" },
+  { value: "dentistry", label: "Dentistry" },
+  { value: "education", label: "Education" },
+  { value: "engineering", label: "Engineering" },
+  { value: "environment", label: "Environment" },
+  { value: "fine_arts", label: "Fine Arts" },
+  { value: "forestry", label: "Forestry" },
+  { value: "graduate_studies", label: "Graduate Studies" },
+  { value: "health_sciences", label: "Health Sciences" },
+  { value: "humanities", label: "Humanities" },
+  { value: "information_technology", label: "Information Technology" },
+  { value: "journalism", label: "Journalism" },
+  { value: "kinesiology", label: "Kinesiology" },
+  { value: "law", label: "Law" },
+  { value: "library_science", label: "Library Science" },
+  { value: "mathematics", label: "Mathematics" },
+  { value: "media_studies", label: "Media Studies" },
+  { value: "medicine", label: "Medicine" },
+  { value: "music", label: "Music" },
+  { value: "nursing", label: "Nursing" },
+  { value: "other", label: "Other" },
+  { value: "pharmacy", label: "Pharmacy" },
+  { value: "public_health", label: "Public Health" },
+  { value: "public_policy", label: "Public Policy" },
+  { value: "science", label: "Science" },
+  { value: "social_sciences", label: "Social Sciences" },
+  { value: "social_work", label: "Social Work" },
+  { value: "veterinary_medicine", label: "Veterinary Medicine" }
+];
 
 export const PercentageToGPA = (percentage: number): number => {
   const letterGrade = PercentageToGradeLetter(percentage);
   return GradeLetterToGPA(letterGrade);
 };
+
 // Helper function to get subject name for display
+// probs dont need this after the proper names are fetched from db curricula 
 export const getSubjectDisplayName = (subject: Subject): string => {
   const displayNames: Record<Subject, string> = {
     english: "English",
@@ -20,7 +95,7 @@ export const getSubjectDisplayName = (subject: Subject): string => {
     other: "Other",
     physical_education: "Physical Education",
   }
-  
+
   return displayNames[subject] || subject
 }
 
