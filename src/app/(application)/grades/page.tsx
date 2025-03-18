@@ -248,7 +248,7 @@ export default function GradesOverview() {
                           </SelectItem>
                         ) : (
                           courseSubjects.map((course) => (
-                            <SelectItem key={course.subject} value={course.course_code}>
+                            <SelectItem key={`${course.subject}_${course.course_code}`} value={course.course_code}>
                               {course.course_code}
                             </SelectItem>
                           ))

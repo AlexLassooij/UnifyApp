@@ -8,12 +8,15 @@ import { ArrowRight, Calendar, Bookmark, MessageSquare, Files, ChevronRight } fr
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { format, differenceInDays, parseISO } from "date-fns";
-import { parse } from "path"
+import { useUserStore } from "@/store/userStore"
+
 
 export default function Dashboard() {
+  const { user } = useUserStore()
+
   return (
     <div className="space-y-6">
-      <h1 className="text-4xl font-bold text-[#191919]">Hello, User</h1>
+      <h1 className="text-4xl font-bold text-[#191919]">Hello, {user?.name.split(" ")[0]}</h1>
 
       <div className="grid gap-6 md:grid-cols-2">
         <Card>

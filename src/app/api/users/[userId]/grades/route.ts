@@ -4,9 +4,9 @@ import { usersCollection } from "@/firebase/clientApp";
 import { UserGrade } from "@/types/datamodel/datamodel";
 
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: { userId: string } }) {
   try {
-    const userId = params.id;
+    const userId = params.userId;
     
     if (!userId) {
       return NextResponse.json(

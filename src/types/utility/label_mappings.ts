@@ -4,6 +4,25 @@ export const PercentageToGPA = (percentage: number): number => {
   const letterGrade = PercentageToGradeLetter(percentage);
   return GradeLetterToGPA(letterGrade);
 };
+// Helper function to get subject name for display
+export const getSubjectDisplayName = (subject: Subject): string => {
+  const displayNames: Record<Subject, string> = {
+    english: "English",
+    math_algebra: "Math (Algebra)",
+    math_calculus: "Math (Calculus)",
+    math_foundation: "Math (Foundation)",
+    biology: "Biology",
+    chemistry: "Chemistry",
+    physics: "Physics",
+    social_studies: "Social Studies",
+    other_language: "Other Language",
+    fine_art: "Fine Arts",
+    other: "Other",
+    physical_education: "Physical Education",
+  }
+  
+  return displayNames[subject] || subject
+}
 
 export const PercentageToGradeLetter = (percentage: number): GradeLetter => {
     if (percentage >= 90) return "A+";

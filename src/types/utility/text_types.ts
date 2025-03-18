@@ -20,7 +20,7 @@ export interface SubheadingAndParagraphList {
 // one / no heading, bullet points
 export interface SubheadingAndBulletPoints {
     subheading?: string;
-    bullets: Paragraph[];
+    bullets: ParagraphList;
 }
 
 

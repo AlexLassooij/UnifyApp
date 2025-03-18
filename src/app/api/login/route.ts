@@ -42,13 +42,11 @@ export async function POST(request: Request) {
       console.debug(newUser)
       const docRef = await addDoc(usersCollection, newUser);
 
-      const userId = docRef.id;
-      await setDoc(docRef, { ...newUser, id: userId });
       return NextResponse.json({ ...newUser, id: docRef.id }, { status: 201 });
       // redirect to user setup page if new user
     } else {
       const userDoc = querySnapshot.docs[0];
-      return NextResponse.json({...userDoc.data()}, { status: 200 });
+      return NextResponse.json({...userDoc.data(), id: userDoc.id}, { status: 200 });
       // redirect to user dashboard if existing user
     }
   } catch (error) {
