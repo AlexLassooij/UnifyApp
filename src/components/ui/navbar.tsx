@@ -1,11 +1,23 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
+import { cn } from "@/lib/utils";
+
 import { usePathname } from "next/navigation"
 import { useState } from 'react';
 import { Home, BookCopy, Files, Users2, Search, User, ChevronLeft, ChevronRight, ClipboardList } from 'lucide-react';
 
-const Navbar = () => {
+import { Button } from "@/components/ui/button"
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu"
+
+export function AppNavbar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const pathname = usePathname();
 
@@ -45,5 +57,59 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export function Navbar() {
+  return (
+    <header className="sticky top-0 z-50 w-full bg-primary rounded-br-2xl rounded-bl-2xl">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/brand/logo.svg"
+            alt="Unify Logo"
+            width={60}
+            height={60}
+          />
+          <h1 className="pt-1 text-4xl font-medium text-default font-spartan">Unify</h1>
+        </Link>
+        <NavigationMenu className="hidden md:flex">
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <Link href="/students" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>Students</NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/parents" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>Parents</NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/testimonials" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>Testimonials</NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/about" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>About</NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+        <div className="flex items-center gap-4">
+          <Link href="/login" className={cn(navigationMenuTriggerStyle(), "font-bold")}>
+            Log In
+          </Link>
+          <Button asChild className="text-lg font-bold bg-purple-light hover:bg-purple">
+            <Link href="/signup">Sign Up</Link>
+          </Button>
+        </div>
+      </div>
+    </header>
+  )
+}
+
+
+
+
+
+
 

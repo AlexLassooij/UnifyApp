@@ -14,12 +14,19 @@ export default {
         poppins: [
           'Poppins',
           ...fontFamily.sans
+        ],
+        spartan: [
+          'League Spartan',
+          ...fontFamily.sans
         ]
       },
       colors: {
         // Configure your brand colors from CSS variables
         primary: 'var(--color-brand-primary)',    // #B3D1DF
-        purple: 'var(--color-brand-purple)',    // #B3D1DF
+        purple: {
+          DEFAULT: 'var(--color-brand-purple)',
+          light: 'var(--color-brand-purple-light)', // A brighter variant
+        },
         secondary: 'var(--color-brand-secondary)', // #66757C
         accent: 'var(--color-brand-accent)',       // #A78BFA
         ocre: 'var(--color-brand-ocre)', // #FFC107

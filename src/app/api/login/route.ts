@@ -6,32 +6,30 @@ import { usersCollection } from "@/firebase/clientApp";
 
 
 export async function POST(request: Request) {
-  const { email, name } = await request.json();
+  const { email, name, method } = await request.json();
 
   if (!email) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
   }
 
   try {
-    // const usersnap = await db.collection('curricula').get();
-    // // console.debug(usersnap.docs)
-    // // usersnap.then((snapshot) => {
-    // //   snapshot.forEach((doc) => {
-    // //     console.debug(doc.id, '=>', doc.data());
-    // //   });
-    // // });
-    // // return NextResponse.json({ message: 'Internal server error' }, { status: 200 });
-    // return null
     const q = query(usersCollection, where("email", "==", email));
     const querySnapshot = await getDocs(q);
 
+    if (method === 'emp' && querySnapshot.empty) {
+      return NextResponse.json(
+        { error: 'No user found with this email address' },
+        { status: 404 } // 404 Not Found is appropriate for this case
+      );
+    }
+    
     if (querySnapshot.empty) {
       const newUser: User = {
         name,
         email,
         high_school: '',
-        curriculum: null,
-        province: null,
+        curriculum: "none",
+        province: "none",
         saved_programs: [],
         saved_universities: [],
         recommended_programs: [],

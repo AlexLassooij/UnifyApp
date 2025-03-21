@@ -1,5 +1,5 @@
 import "@/app/globals.css";
-import Navbar from "@/components/ui/navbar";
+import { AppNavbar } from "@/components/ui/navbar";
 
 // This is the main app layout, which wraps all pages in the app. So this is where the navbar should be placed
 
@@ -23,8 +23,10 @@ export default function AppLayout({
 }>) {
   return (
   <div id="application-layout-container" className="flex min-h-screen">
-    <Navbar />
-    <main className="flex-1 bg-[#f3f3f3] p-12">{children}</main>
+    <AppNavbar />
+    <main className="flex-1 bg-[#f3f3f3] p-12">
+      {children}
+    </main>
   </div>
   );
 }

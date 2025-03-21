@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 h1 {
   font-size: 2rem;
@@ -70,6 +74,7 @@ h1 {
   --color-brand-primary: #B3D1DF;   /* Example brand primary color */
   --color-brand-secondary: #66757C; /* Example brand secondary color */
   --color-brand-purple: #A78BFA;    /* Example brand accent color */
+  --color-brand-purple-light: #b79df9; /* Slightly brighter */
   --color-brand-ocre: #FFC107;    /* Example brand accent color */
   --color-text-default: #191919;    /* Your text color */
   --color-text-muted: #666666;      /* Muted text color */

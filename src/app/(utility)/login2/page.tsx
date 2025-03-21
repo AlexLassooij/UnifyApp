@@ -1,18 +1,21 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import { signInWithRedirect, signInWithPopup, getRedirectResult, GoogleAuthProvider, OAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithPopup, GoogleAuthProvider, OAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/firebase/clientApp';
 import { useUserStore } from '@/store/userStore';
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillApple } from 'react-icons/ai';
 
+
 export default function SignInPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [noAccountFound, setNoAccountFound] = useState(false);
+
   const router = useRouter();
   const { setUser } = useUserStore();
 
@@ -87,6 +90,7 @@ export default function SignInPage() {
   const signInWithGoogle = async () => {
     setIsProcessing(true);
     setError(null);
+    setNoAccountFound(false);
     const provider = new GoogleAuthProvider();
     
     try {
@@ -129,6 +133,7 @@ export default function SignInPage() {
       }
     } catch (error: any) {
       console.error('Error signing in with Google:', error);
+      setNoAccountFound(true);
       
       // Handle specific error cases
       if (error.code === 'auth/popup-closed-by-user') {
@@ -158,10 +163,38 @@ export default function SignInPage() {
   const signInWithEmail = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, isSignIn: true }),
+      });
+  
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData);
+        router.push('/dashboard');
+      } else if (response.status === 404) {
+        setError('No account found with this email address. Please check your email or sign up.');
+        setNoAccountFound(true);
+      } else {
+        setError('Failed to complete sign-in process.');
+      }
       // Redirect or update UI upon successful sign-in
-    } catch (error) {
-      setError('Failed to sign in with email. Please try again.');
-      console.error(error);
+    } catch (error: any) {
+      console.error('Error signing in with email:', error);
+      setNoAccountFound(true);
+      // Handle specific Firebase error cases
+      if (error.code === 'auth/user-not-found') {
+        setError('No account found with this email address. Please check your email or sign up.');
+      } else if (error.code === 'auth/wrong-password') {
+        setError('Incorrect password. Please try again.');
+      } else {
+        setError('Failed to sign in with email. Please try again.');
+      }
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -172,23 +205,7 @@ export default function SignInPage() {
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
         </div>
         <div className="mt-8 space-y-6">
-          <div className="space-y-4">
-            <button
-              onClick={signInWithGoogle}
-              className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              <FcGoogle className="h-5 w-5 mr-2" />
-              Sign in with Google
-            </button>
-            <button
-              onClick={signInWithApple}
-              className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              <AiFillApple className="h-5 w-5 mr-2" />
-              Sign in with Apple
-            </button>
-          </div>
-          <div className="space-y-4">
+        <div className="space-y-4">
             <input
               type="email"
               value={email}
@@ -205,14 +222,66 @@ export default function SignInPage() {
             />
             <button
               onClick={signInWithEmail}
-              className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              disabled={isProcessing}
+              className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-bold text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
             >
-              Sign in with Email
+              {isProcessing ? (
+                <>
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Signing in...
+                </>
+              ) : (
+                <>Sign in with Email</>
+              )}
             </button>
           </div>
+          <div className="space-y-4">
+            <button
+              onClick={signInWithGoogle}
+              disabled={isProcessing}
+              className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-bold text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+            >
+              {isProcessing ? (
+                <>
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Signing in...
+                </>
+              ) : (
+                <>
+                  <FcGoogle className="h-5 w-5 mr-2" />
+                  Sign in with Google
+                </>
+              )}
+            </button>
+            {/* <button
+              onClick={signInWithApple}
+              className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              <AiFillApple className="h-5 w-5 mr-2" />
+              Sign in with Apple
+            </button> */}
+          </div>
+          
           {error && (
             <div className="text-red-500 text-center mt-2" role="alert">
               {error}
+            </div>
+          )}
+          {noAccountFound && (
+            <div className="text-center mt-4">
+              <span className="text-gray-600">New to Unify?</span>
+              <button
+                onClick={() => router.push('/signup')}
+                className="ml-2 text-indigo-600 hover:text-indigo-500 font-medium"
+              >
+                Create an account
+              </button>
             </div>
           )}
         </div>

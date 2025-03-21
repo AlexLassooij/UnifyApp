@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { format, differenceInDays, parseISO } from "date-fns";
 import { useUserStore } from "@/store/userStore"
-
+import { cn } from "@/lib/utils";
+import styles from './styles.module.css'
 
 export default function Dashboard() {
   const { user } = useUserStore()
@@ -162,7 +163,7 @@ export default function Dashboard() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-[260px] overflow-y-auto pr-1 space-y-4">
+            <div className={cn("h-[260px] overflow-y-auto pr-1 space-y-4", styles.customscrollbar)}>
               {saved.map((item, i) => (
                 <div key={i} className="flex items-start justify-between gap-4 pb-4">
                   <div className="flex gap-3">

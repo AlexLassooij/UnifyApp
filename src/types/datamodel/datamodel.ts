@@ -52,7 +52,7 @@ export interface User {
   recommended_universities: string[]; // FK, unique
   grades: UserGrade[];
   // TODO : add user preferences
-  program_match_scores: {
+  program_match_scores?: {
     program_id: string;
     score: number;
   }[];
