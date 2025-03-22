@@ -1,6 +1,6 @@
 {
     "name": "Unify",
     "short_name": "Unify Canada",
-    "description": "An Canadian University Application Platform",
-    "start_url": "/"
+    "description": "A Canadian University Application Platform",
+    "start_url": "/home"
   }

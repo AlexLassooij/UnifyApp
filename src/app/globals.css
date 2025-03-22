@@ -154,4 +154,11 @@ h1 {
   display: none;  /* Chrome, Safari, Opera */
 }
 
+.required-field::after {
+  content: "*";
+  color: #ef4444; /* Tailwind's red-500 */
+  margin-left: 4px;
+  font-weight: bold;
+}
+
 

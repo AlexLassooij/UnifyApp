@@ -26,12 +26,6 @@ export default function LoginPage() {
   const router = useRouter();
   const { setUser } = useUserStore();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle login logic here
-    console.log({ email, password, acceptTerms })
-  }
-
   const signInWithGoogle = async () => {
     setIsProcessing(true);
     setError(null);
@@ -53,8 +47,9 @@ export default function LoginPage() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            email,
+            email: email,
             name: name || 'User',
+            signup: false,
           }),
         });
   
@@ -113,7 +108,10 @@ export default function LoginPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, isSignIn: true }),
+        body: JSON.stringify({ 
+            email: email,             
+            signup: false,
+        }),
       });
   
       if (response.ok) {
@@ -181,7 +179,7 @@ export default function LoginPage() {
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Create a password"
+                      placeholder="Password"
                       className="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
                     />
                   </div>

@@ -6,7 +6,7 @@ import { usersCollection } from "@/firebase/clientApp";
 
 
 export async function POST(request: Request) {
-  const { email, name, method } = await request.json();
+  const { email, name, signup=false } = await request.json();
 
   if (!email) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -16,14 +16,21 @@ export async function POST(request: Request) {
     const q = query(usersCollection, where("email", "==", email));
     const querySnapshot = await getDocs(q);
 
-    if (method === 'emp' && querySnapshot.empty) {
+    if (!signup && querySnapshot.empty) {
       return NextResponse.json(
         { error: 'No user found with this email address' },
         { status: 404 } // 404 Not Found is appropriate for this case
       );
     }
-    
-    if (querySnapshot.empty) {
+
+    if (signup && !querySnapshot.empty) {
+      return NextResponse.json(
+        { error: 'E-mail address already in use' },
+        { status: 404 } // 404 Not Found is appropriate for this case
+      );
+    }
+
+    if (signup && querySnapshot.empty) {
       const newUser: User = {
         name,
         email,
@@ -36,12 +43,12 @@ export async function POST(request: Request) {
         recommended_universities: [],
         grades: [],
       };
-
+      
       console.debug(newUser)
       const docRef = await addDoc(usersCollection, newUser);
 
-      return NextResponse.json({ ...newUser, id: docRef.id }, { status: 201 });
-      // redirect to user setup page if new user
+      return NextResponse.json({ ...newUser, id: docRef.id }, { status: 201 });          
+      // signup false and not empty
     } else {
       const userDoc = querySnapshot.docs[0];
       return NextResponse.json({...userDoc.data(), id: userDoc.id}, { status: 200 });

@@ -11,7 +11,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { userId
     const applicationRef = doc(applicationsCollection, applicationId);
 
     const applicationData = await request.json();
-    const dataToUpdate: any = { ...applicationData.data };
+    const dataToUpdate = { ...applicationData.data };
     // TODO deadline missing from POST
     console.debug("DATA TO UPDATE", dataToUpdate) 
     

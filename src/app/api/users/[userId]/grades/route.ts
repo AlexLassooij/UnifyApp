@@ -52,9 +52,9 @@ export async function GET(request: NextRequest, { params }: { params: { userId: 
 }
 
 // Add POST handler to the existing route.ts file
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(request: NextRequest, { params }: { params: { userId: string } }) {
   try {
-    const userId = params.id;
+    const userId = params.userId;
     
     if (!userId) {
       return NextResponse.json(

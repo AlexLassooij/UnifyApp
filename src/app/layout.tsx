@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Unify",
-  description: "All the university information in one place",
+  description: "A Canadian University Application Platform",
   applicationName: "Unify Canada",
 }
 

@@ -299,7 +299,7 @@ export default function SearchPage() {
           {/* Search Results */}
           <div className="space-y-6">
             {PROGRAMS.map((program) => (
-              <Card key={program.id} className="p-6 bg-white">
+              <Card key={program.id} className="p-6 bg-white hover:bg-purple-light transition-colors">
                 <div className="flex justify-between items-start">
                   <div>
                     <h2 className="text-2xl font-medium mb-2">{program.program_name}</h2>

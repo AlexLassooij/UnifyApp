@@ -19,7 +19,7 @@ export default function Dashboard() {
     <div className="space-y-6">
       <h1 className="text-4xl font-bold text-[#191919]">Hello, {user?.name.split(" ")[0]}</h1>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-4">
@@ -28,7 +28,7 @@ export default function Dashboard() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-[260px] overflow-y-auto pr-1 space-y-4">
+            <div className={cn("h-[260px] overflow-y-auto pr-1 space-y-4", styles.customscrollbar)}>
               {deadlines.map((deadline, i) => {
 
                 const daysLeft = differenceInDays(parseISO(deadline.date), new Date());
@@ -81,7 +81,7 @@ export default function Dashboard() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-[260px] overflow-y-auto pr-1 space-y-4">
+            <div className={cn("h-[260px] overflow-y-auto pr-1 space-y-4", styles.customscrollbar)}>
               {messages.map((message, i) => (
                 <div key={i} className="flex items-start justify-between gap-4 pb-4">
                   <div className="flex gap-3">
@@ -122,7 +122,7 @@ export default function Dashboard() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-[260px] overflow-y-auto pr-1 space-y-4">
+            <div className={cn("h-[260px] overflow-y-auto pr-1 space-y-4", styles.customscrollbar)}>
               {applications.map((app, i) => (
                 <div key={i} className="flex items-start justify-between gap-4 pb-4">
                   <div className="flex gap-3">
