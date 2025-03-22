@@ -32,7 +32,7 @@ export function AppNavbar() {
   ];
 
   return (
-    <div className={`max-h-screen sticky top-0 overflow-y-auto flex flex-col justify-start pt-4 items-center ${isCollapsed ? 'min-w-12' : 'p-4 w-[192px] min-w-[142px]' } bg-[#c0dce9] transition-width duration-300 rounded-tr-2xl rounded-bl-2xl`}>
+    <div className={`max-h-screen sticky top-0 overflow-y-auto flex flex-col justify-start pt-4 items-center ${isCollapsed ? 'min-w-12' : 'p-4 w-[192px] min-w-[142px]' } bg-[#c0dce9] transition-width duration-300 rounded-tr-2xl rounded-br-2xl`}>
       <div className={`flex items-center w-full ${isCollapsed ? 'justify-center' : 'justify-start'}`}>
         <button onClick={() => setIsCollapsed(!isCollapsed)} className="flex justify-center items-center text-sm">
           {isCollapsed ? <ChevronRight className="h-5 w-5" /> : <><ChevronLeft className="h-5 w-5"/><div>Collapse</div></>}

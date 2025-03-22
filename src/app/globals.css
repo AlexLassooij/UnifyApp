@@ -70,6 +70,7 @@ h1 {
 }
 
 :root {
+  --color-brand-accent-light: #daeaf2;   /* Example brand primary color */
   --color-brand-accent: #c0dce9;   /* Example brand primary color */
   --color-brand-primary: #B3D1DF;   /* Example brand primary color */
   --color-brand-secondary: #66757C; /* Example brand secondary color */

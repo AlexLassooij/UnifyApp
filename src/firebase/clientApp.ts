@@ -3,7 +3,7 @@ import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-
+import { liteClient as algoliasearch } from 'algoliasearch/lite';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -28,6 +28,12 @@ const usersCollection = collection(db, "users");
 const programsCollection = collection(db, "programs");
 const universitiesCollection = collection(db, "universities");
 const curriculaCollection = collection(db, "curricula");
+
+const searchClient = algoliasearch(
+  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+  process.env.NEXT_PUBLIC_ALGOLIA_WRITE_KEY
+);
+
 export {
   app,
   db,
@@ -37,5 +43,6 @@ export {
   usersCollection,
   programsCollection,
   universitiesCollection,
-  curriculaCollection
+  curriculaCollection,
+  searchClient
 };
