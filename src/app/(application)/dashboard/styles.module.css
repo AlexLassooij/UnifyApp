@@ -1,0 +1,32 @@
+/* Custom scrollbar that only appears when scrolling */
+.customscrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    transition: scrollbar-color 0.3s ease;
+  }
+  
+  .customscrollbar:hover,
+  .customscrollbar:focus,
+  .customscrollbar:active {
+    scrollbar-color: var(--color-brand-accent) transparent;
+  }
+  
+  /* .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb,
+  .custom-scrollbar:focus::-webkit-scrollbar-thumb,
+  .custom-scrollbar:active::-webkit-scrollbar-thumb {
+    background-color: rgba(167, 139, 250, 0.5);
+  } */ 
