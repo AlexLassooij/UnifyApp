@@ -3,10 +3,10 @@ import { Timestamp, doc, collection, getDocs, addDoc, serverTimestamp } from 'fi
 import { usersCollection } from '@/firebase/clientApp';
 
 // GET all applications for a specific user
-export async function GET(request: NextRequest, { params }: { params: { userId: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ userId: string }> }) {
   try {
     
-    const userId = params.userId;
+    const { userId } = await params;
     
     
     // Get applications subcollection for this user

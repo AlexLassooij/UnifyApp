@@ -42,11 +42,10 @@ export async function PATCH(request: NextRequest, { params }: { params: { userId
   }
 }
 
-
-export async function DELETE(request: NextRequest, { params }: { params: { userId: string; applicationId: string } }
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ userId: string; applicationId: string }> }
 ) {
   try {
-    const { userId, applicationId } = params;
+    const { userId, applicationId } = await params;
     
     const userDocRef = doc(usersCollection, userId);
     const applicationsCollection = collection(userDocRef, 'applications');

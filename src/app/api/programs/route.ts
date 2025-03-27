@@ -40,45 +40,45 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
-  try {
-    const { searchParams } = new URL(request.url);
-    const facultyFilter = searchParams.get('faculty');
-    const universityFilter = searchParams.get('university');
-    const provinceFilter = searchParams.get('province');
+// export async function GET(request: NextRequest) {
+//   try {
+//     const { searchParams } = new URL(request.url);
+//     const facultyFilter = searchParams.get('faculty');
+//     const universityFilter = searchParams.get('university');
+//     const provinceFilter = searchParams.get('province');
     
-    let query = adminDb.collection('programs');
+//     let query = adminDb.collection('programs');
     
-    // Apply filters if provided
-    if (facultyFilter) {
-      query = query.where('faculty', '==', facultyFilter);
-    }
+//     // Apply filters if provided
+//     if (facultyFilter) {
+//       query = query.where('faculty', '==', facultyFilter);
+//     }
     
-    if (universityFilter) {
-      query = query.where('university_id', '==', universityFilter);
-    }
+//     if (universityFilter) {
+//       query = query.where('university_id', '==', universityFilter);
+//     }
     
-    if (provinceFilter) {
-      query = query.where('university_location', '>=', provinceFilter)
-                  .where('university_location', '<=', provinceFilter + '\uf8ff');
-    }
+//     if (provinceFilter) {
+//       query = query.where('university_location', '>=', provinceFilter)
+//                   .where('university_location', '<=', provinceFilter + '\uf8ff');
+//     }
     
-    const snapshot = await query.get();
+//     const snapshot = await query.get();
     
-    const programs: Program[] = [];
-    snapshot.forEach(doc => {
-      programs.push(formatProgramDates(doc.data() as Program));
-    });
+//     const programs: Program[] = [];
+//     snapshot.forEach(doc => {
+//       programs.push(formatProgramDates(doc.data() as Program));
+//     });
     
-    return NextResponse.json({ programs });
-  } catch (error) {
-    console.error('Error fetching programs:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch programs', details: error.message },
-      { status: 500 }
-    );
-  }
-}
+//     return NextResponse.json({ programs });
+//   } catch (error) {
+//     console.error('Error fetching programs:', error);
+//     return NextResponse.json(
+//       { error: 'Failed to fetch programs', details: error.message },
+//       { status: 500 }
+//     );
+//   }
+// }
 
 // Helper function to format date fields for Firestore
 function formatDateFields(program: any): any {

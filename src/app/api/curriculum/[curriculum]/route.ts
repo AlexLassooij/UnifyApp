@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { query, where, getDocs } from "firebase/firestore";
 import { curriculaCollection } from "@/firebase/clientApp";
-import { Curriculum } from "@/types/datamodel/datamodel";
 
-export async function GET(request: Request, context: { params: { curriculum: Curriculum } }) {
+
+export async function GET(request: Request, { params }: { params: Promise<{ userCurriculum: string }>}) {
   // Get the curriculum from the URL query parameter
 
-  const userCurriculum = context.params.curriculum
+  const { userCurriculum } = await params
 
   if (!userCurriculum) {
     return NextResponse.json(

@@ -1,5 +1,4 @@
 import { LucideIcon as LucideIconType } from 'lucide-react';
-import { cn } from "@/lib/utils";
 
 // CSS color variables mapping (matching your branding)
 const IconColors = {
