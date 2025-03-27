@@ -189,7 +189,9 @@ const UNIVERSITIES: University[] = [
         ],
       },
       { 
-        text: "McGill offers the Keep.meSAFE program, providing 24/7 access to counselors in over 60 languages through a mobile app." 
+        bullets:[
+          { text: "McGill offers the Keep.meSAFE program, providing 24/7 access to counselors in over 60 languages through a mobile app." }
+        ]
       }
     ],
     housing_guaranteed: [{ text: "First-year students from outside the Montreal area are guaranteed housing." }],

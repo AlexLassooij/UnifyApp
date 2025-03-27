@@ -3,12 +3,12 @@ import { query, where, getDocs } from "firebase/firestore";
 import { curriculaCollection } from "@/firebase/clientApp";
 
 
-export async function GET(request: Request, { params }: { params: Promise<{ userCurriculum: string }>}) {
+export async function GET(request: Request, { params }: { params: Promise<{ curriculum: string }>}) {
   // Get the curriculum from the URL query parameter
 
-  const { userCurriculum } = await params
+  const { curriculum } = await params
 
-  if (!userCurriculum) {
+  if (!curriculum) {
     return NextResponse.json(
       { error: "Missing curriculum parameter" },
       { status: 400 }
@@ -17,7 +17,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ user
 
   try {
     // Query for the curriculum document
-    const q = query(curriculaCollection, where("curriculum", "==", userCurriculum));
+    const q = query(curriculaCollection, where("curriculum", "==", curriculum));
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {

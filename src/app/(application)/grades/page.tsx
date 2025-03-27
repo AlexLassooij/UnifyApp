@@ -135,12 +135,13 @@ export default function GradesOverview() {
       const data = await response.json();
       const fetchedGrades = data.grades || [];
       setGrades(fetchedGrades);
-      console.log(`Loaded ${fetchedGrades.length} grades for user: ${userId}`);
+      console.debug(`Loaded ${fetchedGrades.length} grades for user: ${userId}`);
       // Initially select all grades
-      setSelectedGrades(new Set(fetchedGrades.map(g => g.id)));
+      setSelectedGrades(new Set(fetchedGrades.map((g: GradeData) => g.id)));
     } catch (error) {
       console.error("Failed to fetch grades:", error);
     } finally {
+      console.debug(grades)
       setIsLoadingGrades(false);
     }
   }
@@ -211,7 +212,7 @@ export default function GradesOverview() {
       return { averagePercentage: 0, gpa: 0 }
     }
     
-    const totalPercentage = selectedGradeItems.reduce((sum, grade) => sum + parseInt(grade.grade), 0)
+    const totalPercentage = selectedGradeItems.reduce((sum, grade) => sum + grade.grade, 0)
     const avgPercentage = totalPercentage / selectedGradeItems.length
     
     // Calculate GPA (4.0 scale) using the extracted function

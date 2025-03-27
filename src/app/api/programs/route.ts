@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error adding program:', error);
     return NextResponse.json(
-      { error: 'Failed to add program', details: error.message },
+      { error: 'Failed to add program', details: (error as Error).message },
       { status: 500 }
     );
   }

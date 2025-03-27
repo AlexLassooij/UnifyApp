@@ -1,4 +1,5 @@
 import { universitiesCollection } from "@/firebase/clientApp";
+import { University } from "@/types/datamodel/datamodel";
 import { getDocs } from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -33,19 +34,21 @@ import { NextRequest, NextResponse } from "next/server";
 // }
 
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET(req: NextRequest) {
     try {
         // Get all documents from the universities collection
         const querySnapshot = await getDocs(universitiesCollection);
         
         // Create an array to hold all university data
-        const universities = [];
+        const universities: University[] = [];
         
         // Loop through each document and add it to the array
         querySnapshot.forEach((doc) => {
+          // TODO may need to make some fields optional
+          const universityData = doc.data() as University;
           universities.push({
             id: doc.id,
-            ...doc.data()
+            ...universityData
           });
         });
         

@@ -11,7 +11,7 @@ const saveProgram = (programId: string) => {
     return true
     }
 
-export default function ProgramSearchResult({ hit }) {
+export default function ProgramSearchResult({ hit }: { hit: any }) {
     console.debug(hit)
   return (
     <Card className="mb-6 p-6 bg-white hover:bg-[#daeaf2] transition-colors">

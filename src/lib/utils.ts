@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
-import { getFirestore, collection, FirestoreDataConverter } from 'firebase/firestore';
+import { getFirestore, collection } from 'firebase/firestore';
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { firebaseConfig } from '@/firebase/clientApp';
 import { User } from '@/types/datamodel/datamodel';
@@ -26,12 +26,12 @@ const converter = <T>() => ({
   fromFirestore: (snapshot: FirebaseFirestore.QueryDocumentSnapshot) => snapshot.data() as T
 })
 
-const dataPoint = <T>(collectionPath: string) => {
-  collection(firestoreDb, collectionPath).withConverter(converter<T>())
-}
-const db = {
-  // list your collections here
-  users: dataPoint<User>('users')
-}
+// const dataPoint = <T>(collectionPath: string) => {
+//   collection(firestoreDb, collectionPath).withConverter(converter<T>())
+// }
+// const db = {
+//   // list your collections here
+//   users: dataPoint<User>('users')
+// }
 
-export { db }
+// export { db }

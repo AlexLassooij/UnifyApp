@@ -1,10 +1,11 @@
 import { NextResponse, NextRequest } from "next/server";
 import { doc, updateDoc, deleteDoc, Timestamp, serverTimestamp, collection } from 'firebase/firestore';
 import { usersCollection } from '@/firebase/clientApp';
+import { SubTask } from "@/types/datamodel/datamodel";
 
-export async function PATCH(request: NextRequest, { params }: { params: { userId: string; applicationId: string } }) {
+export async function PATCH(request: NextRequest, { params }: { params: Promise<{ userId: string; applicationId: string }> }) {
   try {
-    const { userId, applicationId } = params;
+    const { userId, applicationId } = await params;
     const userDocRef = doc(usersCollection, userId);
     const applicationsCollection = collection(userDocRef, 'applications');
     const applicationRef = doc(applicationsCollection, applicationId);
@@ -28,7 +29,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { userId
     
     // Convert sub_tasks deadlines if they exist
     if (applicationData.data.sub_tasks) {
-      dataToUpdate.sub_tasks = applicationData.data.sub_tasks.map(task => ({
+      dataToUpdate.sub_tasks = applicationData.data.sub_tasks.map((task: SubTask) => ({
         ...task,
         deadline: Timestamp.fromDate(new Date(task.deadline))
       }));

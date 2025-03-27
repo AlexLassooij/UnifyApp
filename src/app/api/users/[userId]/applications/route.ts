@@ -44,12 +44,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 }
 
 // POST to create a new application for a specific user
-export async function POST(
-  request: NextRequest,
-  { params }: { params: { userId: string } }
-) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ userId: string }> }) {
   try {
-    const userId = params.userId;
+    const { userId } = await params;
     
     const data = await request.json();
 

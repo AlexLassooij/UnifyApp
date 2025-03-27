@@ -59,6 +59,7 @@ export interface User {
 }
     
 export interface University {
+  id?: string;
   univesity_name: string;
   abbreviated_name: string;
   province: Province;
@@ -88,7 +89,7 @@ export interface University {
 }
 
 export interface Program {
-  id: string;
+  id?: string;
   university_id: string
   university_name: string
   university_location: string;
@@ -119,6 +120,13 @@ export interface Program {
   is_new?: boolean // Added for UI display
 }
 
+export interface SubTask {
+  name: string;
+  status: ApplicationStatus;
+  deadline: Date;
+  notes: string;
+}
+
 export interface Application {
   id?: string;
   program_id: string;
@@ -129,10 +137,6 @@ export interface Application {
   application_deadline: Date;
   last_updated: Date;
   notes: ParagraphList;
-  sub_tasks: {
-    name: string;
-    status: ApplicationStatus;
-    deadline: Date;
-    notes: string;
-  }[]
+  sub_tasks: SubTask[]
 }
+

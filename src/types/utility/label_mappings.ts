@@ -133,7 +133,7 @@ export const GradeLetterToGPA = (gradeLetter: GradeLetter): number => {
   }
 };
 
-export const ProvinceLabels: Record<Province, string> = {
+export const ProvinceLabels: Record<Exclude<Province, 'none'>, string> = {
   "AB": "Alberta",
   "BC": "British Columbia",
   "MB": "Manitoba",
@@ -149,7 +149,7 @@ export const ProvinceLabels: Record<Province, string> = {
   "YT": "Yukon"
 };
 
-export const CurriculumTypeLabels: Record<CurriculumType, string> = {
+export const CurriculumTypeLabels: Record<Exclude<CurriculumType, 'none'>, string> = {
   "AB": "Alberta",
   "BC": "British Columbia",
   "MB": "Manitoba",

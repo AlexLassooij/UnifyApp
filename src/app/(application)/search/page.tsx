@@ -80,7 +80,7 @@ export default function SearchPage() {
                 </SelectTrigger>
                 <SelectContent>
                   {selectedProvince &&
-                    provinceCities[selectedProvince]?.map((city: string) => (
+                    provinceCities[selectedProvince as keyof typeof provinceCities]?.map((city: string) => (
                       <SelectItem key={city} value={city.toLowerCase()}>
                         {city}
                       </SelectItem>
