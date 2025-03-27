@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getDocs, query, where, setDoc, addDoc } from 'firebase/firestore';
+import { getDocs, query, where, addDoc } from 'firebase/firestore';
 import { User } from '@/types/datamodel/datamodel';
 import { usersCollection } from "@/firebase/clientApp";
 

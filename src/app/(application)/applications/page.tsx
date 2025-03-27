@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { ChevronDown, Check, ChevronRight, Calendar as CalendarIcon, Pencil, Plus, Trash2 } from "lucide-react";
+import { ChevronDown, Check, ChevronRight, Pencil, Plus, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Application, ApplicationStatus } from "@/types/datamodel/datamodel";
 import { format } from "date-fns";
@@ -19,7 +19,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { SubheadingAndParagraph, ParagraphList } from "@/types/utility/text_types";
+import { ParagraphList } from "@/types/utility/text_types";
 import { useUserStore } from "@/store/userStore";
 // Import any database functions you need for updates
 // import { updateApplication } from "@/firebase/applications"; 
@@ -383,7 +383,7 @@ function ApplicationRow({
             
             {notes.length === 0 ? (
               <div className="bg-gray-50 rounded p-3 text-sm text-gray-500 text-center">
-                No notes yet. Click "Add Note" to create one.
+                No notes yet. Click &quot;Add Note&quot; to create one.
               </div>
             ) : (
               <div className="space-y-2">
@@ -460,7 +460,7 @@ function ApplicationRow({
             
             {subTasks.length === 0 ? (
               <div className="bg-gray-50 rounded p-3 text-sm text-gray-500 text-center">
-                No tasks yet. Click "Add Task" to create one.
+                No tasks yet. Click &quot;Add Task&quot; to create one.
               </div>
             ) : (
               <div className="space-y-2">

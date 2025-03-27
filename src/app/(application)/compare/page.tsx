@@ -1,12 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { Home,BookCopy,BarChart, Activity, FileText, Users, Search, Settings, ChevronDown, ChevronUp, School, MapPin, Users2, Trophy, BookOpen, Globe, HomeIcon, Landmark, Medal } from "lucide-react"
+import { BarChart, FileText, Users, ChevronDown, ChevronUp, School, MapPin, Users2, Trophy, BookOpen, Globe, HomeIcon, Landmark, Medal } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { University, Subject } from "@/types/datamodel/datamodel"
+import { University, } from "@/types/datamodel/datamodel"
 import { SubheadingAndBulletPoints } from "@/types/utility/text_types"
 import { getSubjectDisplayName } from "@/types/utility/label_mappings"
 // Sample hard-coded university data
@@ -398,7 +398,7 @@ export default function ComparePage() {
                     <span className="font-medium">QS Ranking:</span> {uni.qs_ranking}
                   </div>
                   <div className="text-sm">
-                    <span className="font-medium">MacLean's Ranking:</span> {uni.mcl_ranking}
+                    <span className="font-medium">MacLean&apos;s Ranking:</span> {uni.mcl_ranking}
                   </div>
                   <div className="text-sm">
                     <span className="font-medium">Student Body:</span> {uni.student_body_size.toLocaleString()}

@@ -1,7 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
-import { doc, getDoc, updateDoc, deleteDoc, Timestamp, serverTimestamp, collection } from 'firebase/firestore';
-import { db, usersCollection } from '@/firebase/clientApp';
-import { Application } from "@/types/datamodel/datamodel";
+import { doc, updateDoc, deleteDoc, Timestamp, serverTimestamp, collection } from 'firebase/firestore';
+import { usersCollection } from '@/firebase/clientApp';
 
 export async function PATCH(request: NextRequest, { params }: { params: { userId: string; applicationId: string } }) {
   try {

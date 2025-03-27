@@ -1,5 +1,5 @@
 import { universitiesCollection } from "@/firebase/clientApp";
-import { doc, getDoc, setDoc, deleteDoc, getDocs } from "firebase/firestore";
+import { getDocs } from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
 
 // export async function POST(req: NextRequest, res: NextResponse) {
