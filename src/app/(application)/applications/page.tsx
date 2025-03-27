@@ -317,7 +317,7 @@ function ApplicationRow({
               </PopoverContent>
             </Popover>
           </div>
-          <div className="col-span-3">{university}</div>
+          <div className="ml-2 col-span-3">{university}</div>
           <div className="col-span-2">{program}</div>
           {/* Make deadline clickable for calendar */}
           <div className="col-span-2">

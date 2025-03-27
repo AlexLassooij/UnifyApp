@@ -77,7 +77,8 @@ export default function SignUpPage() {
       const userEmail = user.email;
       const userName = user.displayName;
       
-      if (email) {
+      console.debug('User:', user);
+      if (userEmail) {
         // Make API call to your login endpoint
         const response = await fetch('/api/login', {
           method: 'POST',
@@ -104,6 +105,10 @@ export default function SignUpPage() {
             // Existing user - redirect to dashboard
             router.push('/dashboard');
           }
+          
+        } else if (response.status == 404) {
+          setEmailAlreadyInUse(true);
+          setError('E-mail already in use.');
         } else {
           console.error('Failed to register user with API');
           setError('Failed to complete sign-in process.');
@@ -174,6 +179,7 @@ export default function SignUpPage() {
             router.push('/dashboard');
           }
         } else {
+          setEmailAlreadyInUse(true);
           setError('Failed to complete sign-in process.');
         }
       }
@@ -370,7 +376,7 @@ export default function SignUpPage() {
                     ) : (
                       <div className="flex items-center justify-center">
                         <FcGoogle className="h-5 w-5 mr-2" />
-                        Sign in with Google
+                        Sign up with Google
                       </div>
                     )}
                   </Button>

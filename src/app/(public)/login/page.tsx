@@ -36,10 +36,10 @@ export default function LoginPage() {
       // signInWithPopup returns a UserCredential directly
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      const email = user.email;
-      const name = user.displayName;
+      const userEmail = user.email;
+      const userName = user.displayName;
       
-      if (email) {
+      if (userEmail) {
         // Make API call to your login endpoint
         const response = await fetch('/api/login', {
           method: 'POST',
@@ -47,8 +47,8 @@ export default function LoginPage() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            email: email,
-            name: name || 'User',
+            email: userEmail,
+            name: userName || 'User',
             signup: false,
           }),
         });

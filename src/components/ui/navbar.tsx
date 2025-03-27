@@ -57,7 +57,8 @@ export function AppNavbar() {
   );
 };
 
-export function Navbar() {
+
+export function PublicNavbar() {
   return (
     <header className="sticky top-0 z-50 w-full bg-primary rounded-br-2xl rounded-bl-2xl">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
@@ -107,7 +108,19 @@ export function Navbar() {
   )
 }
 
+export default function NavbarWrapper() {
 
+  const publicRoutes = ["/", "/login", "/signup", "/about", "/testimonials", "/students", "/parents"]
+  const pathname = usePathname()
+
+  // Define paths that should show the navbar (public routes)
+  const isPublicRoute = publicRoutes.includes(pathname)
+
+  // Only render the navbar on public routes
+  if (!isPublicRoute) return null
+
+  return <PublicNavbar />
+}
 
 
 

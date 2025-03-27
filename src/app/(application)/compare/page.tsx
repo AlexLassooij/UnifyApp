@@ -331,16 +331,12 @@ export default function ComparePage() {
 
   // State to track which sections are expanded for each university
   const [expandedSections, setExpandedSections] = useState<{
-    [key: number]: {
       academics: boolean
       studentOrgs: boolean
       socialLife: boolean
       athletics: boolean
-    }
   }>({
-    0: { academics: false, studentOrgs: false, socialLife: false, athletics: false },
-    1: { academics: false, studentOrgs: false, socialLife: false, athletics: false },
-    2: { academics: false, studentOrgs: false, socialLife: false, athletics: false },
+    academics: false, studentOrgs: false, socialLife: false, athletics: false
   })
 
   const handleUniversitySelect = (value: string, index: number) => {
@@ -350,14 +346,12 @@ export default function ComparePage() {
     setSelectedUniversities(newSelected)
   }
 
-  const toggleSection = (index: number, section: "academics" | "studentOrgs" | "socialLife" | "athletics") => {
+  const toggleSection = (section: "academics" | "studentOrgs" | "socialLife" | "athletics") => {
     setExpandedSections((prev) => ({
-      ...prev,
-      [index]: {
-        ...prev[index],
-        [section]: !prev[index][section],
-      },
+        ...prev,
+        [section]: !prev[section],
     }))
+    console.debug(expandedSections)
   }
 
   return (
@@ -511,20 +505,20 @@ export default function ComparePage() {
                   <Button
                     variant="ghost"
                     className="w-full flex justify-between items-center"
-                    onClick={() => toggleSection(index, "academics")}
+                    onClick={() => toggleSection("academics")}
                   >
                     <div className="flex items-center">
                       <BookOpen className="h-5 w-5 mr-2 text-[#a78bfa]" />
                       <span className="font-medium">Academics</span>
                     </div>
-                    {expandedSections[index].academics ? (
+                    {expandedSections.academics ? (
                       <ChevronUp className="h-5 w-5" />
                     ) : (
                       <ChevronDown className="h-5 w-5" />
                     )}
                   </Button>
 
-                  {expandedSections[index].academics && (
+                  {expandedSections.academics && (
                     <div className="mt-4 pl-2">
                       {uni.academics.map((item, i) => (
                         <div key={i} className="mb-3">
@@ -561,20 +555,20 @@ export default function ComparePage() {
                   <Button
                     variant="ghost"
                     className="w-full flex justify-between items-center"
-                    onClick={() => toggleSection(index, "studentOrgs")}
+                    onClick={() => toggleSection("studentOrgs")}
                   >
                     <div className="flex items-center">
                       <Users2 className="h-5 w-5 mr-2 text-[#a78bfa]" />
                       <span className="font-medium">Student Organizations</span>
                     </div>
-                    {expandedSections[index].studentOrgs ? (
+                    {expandedSections.studentOrgs ? (
                       <ChevronUp className="h-5 w-5" />
                     ) : (
                       <ChevronDown className="h-5 w-5" />
                     )}
                   </Button>
 
-                  {expandedSections[index].studentOrgs && (
+                  {expandedSections.studentOrgs && (
                     <div className="mt-4 pl-2">
                       {uni.student_orgs.map((item, i) => (
                         <div key={i} className="mb-3">
@@ -611,20 +605,20 @@ export default function ComparePage() {
                   <Button
                     variant="ghost"
                     className="w-full flex justify-between items-center"
-                    onClick={() => toggleSection(index, "socialLife")}
+                    onClick={() => toggleSection("socialLife")}
                   >
                     <div className="flex items-center">
                       <Users className="h-5 w-5 mr-2 text-[#a78bfa]" />
                       <span className="font-medium">Social Life</span>
                     </div>
-                    {expandedSections[index].socialLife ? (
+                    {expandedSections.socialLife ? (
                       <ChevronUp className="h-5 w-5" />
                     ) : (
                       <ChevronDown className="h-5 w-5" />
                     )}
                   </Button>
 
-                  {expandedSections[index].socialLife && (
+                  {expandedSections.socialLife && (
                     <div className="mt-4 pl-2">
                       {uni.social_life.map((item, i) => (
                         <div key={i} className="mb-3">
@@ -661,20 +655,20 @@ export default function ComparePage() {
                   <Button
                     variant="ghost"
                     className="w-full flex justify-between items-center"
-                    onClick={() => toggleSection(index, "athletics")}
+                    onClick={() => toggleSection("athletics")}
                   >
                     <div className="flex items-center">
                       <Medal className="h-5 w-5 mr-2 text-[#a78bfa]" />
                       <span className="font-medium">Athletics</span>
                     </div>
-                    {expandedSections[index].athletics ? (
+                    {expandedSections.athletics ? (
                       <ChevronUp className="h-5 w-5" />
                     ) : (
                       <ChevronDown className="h-5 w-5" />
                     )}
                   </Button>
 
-                  {expandedSections[index].athletics && (
+                  {expandedSections.athletics && (
                     <div className="mt-4 pl-2">
                       {uni.athletics.map((item, i) => (
                         <div key={i} className="mb-3">

@@ -84,7 +84,7 @@ export interface University {
   accesibility: string;
   strengths: SubheadingAndParagraph[] | SubheadingAndBulletPoints[];
   mental_health_resources: SubheadingAndParagraph[] | SubheadingAndBulletPoints[];
-  homepage: string
+  homepage: string;
 }
 
 export interface Program {

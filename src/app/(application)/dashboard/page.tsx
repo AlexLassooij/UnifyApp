@@ -3,7 +3,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, Calendar, Bookmark, MessageSquare, Files, ChevronRight } from "lucide-react"
+import { ArrowRight, Calendar, Bookmark, MessageSquare, Files, ChevronRight, SearchIcon, Reply } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
@@ -29,22 +29,27 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className={cn("h-[260px] overflow-y-auto pr-1 space-y-4", styles.customscrollbar)}>
-              {deadlines.map((deadline, i) => {
-
+              {deadlines
+                .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+                .map((deadline, i) => {
                 const daysLeft = differenceInDays(parseISO(deadline.date), new Date());
                 const formattedDate = format(deadline.date, "MMM d");
 
                 return (
                   // flex items-start justify-between gap-4 border-b pb-4 last:border-0"
-                  <div key={i} className="flex items-start justify-between gap-4 pb-4">
+                  <div key={i} className="flex items-start justify-between gap-4 pb-2">
                     <div className="flex gap-3">
-                      <Image
-                        src={"/next.svg"}
-                        alt={deadline.institution}
-                        width={40}
-                        height={40}
-                        className="rounded"
-                      />
+                      <div className="flex justify-center items-center min-w-[40px] mr-1">
+                        <Image
+                          src={`/universities/${deadline.university_id}.png`}
+                          alt={deadline.university_id}
+                          width={48}
+                          height={48}
+                          className="object-contain"
+                          style={{ height: "auto", width: "auto", maxHeight: "40px", maxWidth: "40px" }}
+                        />
+                      </div>
+                      
                       {/* max-h-14 is 56px, as defined in the figma design */}
                       <div className="max-h-14 overflow-hidden">
                         <p className="font-medium line-clamp-2">{deadline.details}</p>
@@ -83,21 +88,32 @@ export default function Dashboard() {
           <CardContent>
             <div className={cn("h-[260px] overflow-y-auto pr-1 space-y-4", styles.customscrollbar)}>
               {messages.map((message, i) => (
-                <div key={i} className="flex items-start justify-between gap-4 pb-4">
+                <div key={i} className="flex items-start justify-between gap-4 pb-2">
                   <div className="flex gap-3">
-                    <Image
-                      src={"/next.svg"}
-                      alt={message.name}
-                      width={40}
-                      height={40}
-                      className="rounded-full"
-                    />
+                    <div className="flex justify-center items-center min-w-[40px] mr-1">
+                        <Image
+                          src={`${message.avatar}`}
+                          alt={message.avatar}
+                          width={48}
+                          height={48}
+                          className="object-contain"
+                          style={{ height: "auto", width: "auto", maxHeight: "40px", maxWidth: "40px" }}
+                        />
+                      </div>
                     <div>
-                      <p className="font-medium">{message.content}</p>
+                      <p className="font-medium line-clamp-2">{message.content}</p>
                       <p className="text-sm text-muted-foreground">{message.name}</p>
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground whitespace-nowrap">{message.time} ago</p>
+                  <div className="flex justify-end items-center gap-2">
+                    <p className="text-sm text-muted-foreground whitespace-nowrap">{message.time} ago</p>
+                    <button 
+                      className="text-muted-foreground hover:text-foreground transition-colors" 
+                      aria-label="Reply to message"
+                    >
+                      <Reply className="h-4 w-4" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -124,21 +140,29 @@ export default function Dashboard() {
           <CardContent>
             <div className={cn("h-[260px] overflow-y-auto pr-1 space-y-4", styles.customscrollbar)}>
               {applications.map((app, i) => (
-                <div key={i} className="flex items-start justify-between gap-4 pb-4">
+                <div key={i} className="flex items-start justify-between gap-4 pb-2">
                   <div className="flex gap-3">
-                    <Image
-                      src={"/next.svg"}
-                      alt={app.university}
-                      width={40}
-                      height={40}
-                      className="rounded"
-                    />
+                    <div className="flex justify-center items-center min-w-[40px] mr-1">
+                        <Image
+                          src={`/universities/${app.university_id}.png`}
+                          alt={app.university_id}
+                          width={48}
+                          height={48}
+                          className="object-contain"
+                          style={{ height: "auto", width: "auto", maxHeight: "40px", maxWidth: "40px" }}
+                        />
+                      </div>
                     <div>
                       <p className="font-medium">{app.program}</p>
                       <p className="text-sm text-muted-foreground">{app.university}</p>
                     </div>
                   </div>
-                  <ArrowRight className="h-5 w-5 text-muted-foreground" />
+                  <button 
+                      className="text-muted-foreground hover:text-foreground transition-colors" 
+                      aria-label="To application"
+                    >
+                      <ArrowRight className="h-5 w-5" />
+                    </button>
                 </div>
               ))}
             </div>
@@ -165,21 +189,33 @@ export default function Dashboard() {
           <CardContent>
             <div className={cn("h-[260px] overflow-y-auto pr-1 space-y-4", styles.customscrollbar)}>
               {saved.map((item, i) => (
-                <div key={i} className="flex items-start justify-between gap-4 pb-4">
+                <div key={i} className="flex items-start justify-between gap-4 pb-2">
                   <div className="flex gap-3">
-                    <Image
-                      src={"/next.svg"}
-                      alt={item.university}
-                      width={40}
-                      height={40}
-                      className="rounded"
-                    />
+                    <div className="flex justify-center items-center min-w-[40px] mr-1">
+                      {item.university_id ? (<Image
+                          src={`/universities/${item.university_id}.png`}
+                          alt={item.university_id}
+                          width={48}
+                          height={48}
+                          className="object-contain"
+                          style={{ height: "auto", width: "auto", maxHeight: "40px", maxWidth: "40px" }}
+                        />
+                      ) : (      
+                        <SearchIcon className="text-gray-400 h-8 w-8" />
+                        )}
+                        
+                      </div>
                     <div>
                       <p className="font-medium">{item.program}</p>
                       <p className="text-sm text-muted-foreground">{item.university}</p>
                     </div>
                   </div>
-                  <ArrowRight className="h-5 w-5 text-muted-foreground" />
+                  <button 
+                      className="text-muted-foreground hover:text-foreground transition-colors" 
+                      aria-label="To saved"
+                    >
+                      <ArrowRight className="h-5 w-5" />
+                    </button>
                 </div>
               ))}
             </div>
@@ -202,34 +238,41 @@ export default function Dashboard() {
 
 const deadlines = [
   {
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/revisions_stage2-JxrLHC2XYcEfUf6qHTuwGGEcB1H0zc.png",
-    institution: "University of British Columbia",
-    details: "Deadline Details Deadline Details Deadline Details Deadline Details",
-    date: "2025-03-14", // ISO format: YYYY-MM-DD
+    university_id: "ubc",
+    details: "UBC Engineering supplementary application due",
+    date: "2025-04-15", // ISO format: YYYY-MM-DD
   },
   {
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/revisions_stage2-JxrLHC2XYcEfUf6qHTuwGGEcB1H0zc.png",
-    institution: "University of Calgary",
-    details: "These are more than just application deadlines, but genera...",
-    date: "2025-08-12",
+    university_id: "u_calgary",
+    details: "Submit official transcripts to U of Calgary Admissions Office",
+    date: "2025-04-01",
   },
   {
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/revisions_stage2-JxrLHC2XYcEfUf6qHTuwGGEcB1H0zc.png",
-    institution: "University of British Columbia",
-    details: "deadlines for any tasks related to an application set by the user",
-    date: "2025-03-24",
+    university_id: "mcgill",
+    details: "McGill residence application priority deadline",
+    date: "2025-04-17",
   },
+  {
+    university_id: "u_of_t",
+    details: "UofT scholarship application documents due",
+    date: "2025-03-28",
+  },
+  {
+    university_id: "u_waterloo",
+    details: "Waterloo's major admission award application due",
+    date: "2025-03-30",
+  }
 ]
 
 const messages = [
   {
-    avatar: "/placeholder.svg?height=40&width=40",
-    name: "Vanessa Hu",
-    content: "Message Content",
+    avatar: "/avatar1.png",
+    name: "Michael Dry",
+    content: "My main advice would be to make it personal and specific — don’t just list achievements, but show how they’ve shaped you. Universities love to see your passion, unique experiences, and how you think.",
     time: "7h",
   },
   {
-    avatar: "/placeholder.svg?height=40&width=40",
+    avatar: "/avatar2.png",
     name: "Vanessa Hu",
     content: "Replied to your thread in UBC Housing",
     time: "1h",
@@ -238,17 +281,17 @@ const messages = [
 
 const applications = [
   {
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/revisions_stage2-JxrLHC2XYcEfUf6qHTuwGGEcB1H0zc.png",
+    university_id: "mcgill",
     program: "Software Engineering",
     university: "McGill University",
   },
   {
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/revisions_stage2-JxrLHC2XYcEfUf6qHTuwGGEcB1H0zc.png",
+    university_id: "u_calgary",
     program: "Electrical Engineering",
     university: "University of Calgary",
   },
   {
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/revisions_stage2-JxrLHC2XYcEfUf6qHTuwGGEcB1H0zc.png",
+    university_id: "ubc",
     program: "Integrated Sciences",
     university: "University of British Columbia",
   },
@@ -256,24 +299,23 @@ const applications = [
 
 const saved = [
   {
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/revisions_stage2-JxrLHC2XYcEfUf6qHTuwGGEcB1H0zc.png",
+    university_id: "mcgill",
     program: "Life Sciences",
     university: "McGill University",
   },
   {
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/revisions_stage2-JxrLHC2XYcEfUf6qHTuwGGEcB1H0zc.png",
     program: '"engineering montreal"',
     university: "Search Result",
   },
   {
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/revisions_stage2-JxrLHC2XYcEfUf6qHTuwGGEcB1H0zc.png",
+    university_id: "ubc",
     program: "Kinesiology",
     university: "University of British Columbia",
   },
   {
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/revisions_stage2-JxrLHC2XYcEfUf6qHTuwGGEcB1H0zc.png",
-    program: "Kinesiology",
-    university: "University of British Columbia",
+    university_id: "u_waterloo",
+    program: "Bioinformatics",
+    university: "University of Waterloo",
   },
 ]
 

@@ -3,11 +3,6 @@ import Link from "next/link";
 import { Bookmark, ChevronRight, Heart, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Program } from "@/types/datamodel/datamodel";
-
-interface ProgramCardProps {
-  program: Program;
-}
 
 const savedPrograms = ["1", "2", "3"];
 
