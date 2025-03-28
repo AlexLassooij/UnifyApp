@@ -35,8 +35,8 @@ export async function POST(request: Request) {
         name,
         email,
         high_school: '',
-        curriculum: "none",
-        province: "none",
+        curriculum: "AB", // ! only temporary until we allow users to select province
+        province: "AB",
         saved_programs: [],
         saved_universities: [],
         recommended_programs: [],

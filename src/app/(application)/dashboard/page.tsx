@@ -28,6 +28,95 @@ export default function Dashboard() {
     }
   };
 
+  const futureDate = (days: number): string => {
+    const today = new Date();
+    today.setDate(today.getDate() + days);
+    return today.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+  };
+
+  const deadlines = [
+    {
+      university_id: "ubc",
+      details: "UBC Engineering supplementary application due",
+      date: futureDate(18), // 18 days from today
+    },
+    {
+      university_id: "u_calgary",
+      details: "Submit official transcripts to U of Calgary Admissions Office",
+      date: futureDate(2), // 1 day from today
+    },
+    {
+      university_id: "mcgill",
+      details: "McGill residence application priority deadline",
+      date: futureDate(14), // Today
+    },
+    {
+      university_id: "u_of_t",
+      details: "UofT scholarship application documents due",
+      date: futureDate(0), // 4 days ago
+    },
+    {
+      university_id: "u_waterloo",
+      details: "Waterloo's major admission award application due",
+      date: futureDate(-4), // 4 days ago (keeping this from your original list)
+    }
+  ]
+  
+  const messages = [
+    {
+      avatar: "/avatar1.png",
+      name: "Michael Dry",
+      content: "My main advice would be to make it personal and specific — don’t just list achievements, but show how they’ve shaped you. Universities love to see your passion, unique experiences, and how you think.",
+      time: "7h",
+    },
+    {
+      avatar: "/avatar2.png",
+      name: "Vanessa Hu",
+      content: "Replied to your thread in UBC Housing",
+      time: "1h",
+    },
+  ]
+  
+  const applications = [
+    {
+      university_id: "mcgill",
+      program: "Software Engineering",
+      university: "McGill University",
+    },
+    {
+      university_id: "u_calgary",
+      program: "Electrical Engineering",
+      university: "University of Calgary",
+    },
+    {
+      university_id: "ubc",
+      program: "Integrated Sciences",
+      university: "University of British Columbia",
+    },
+  ]
+  
+  const saved = [
+    {
+      university_id: "mcgill",
+      program: "Life Sciences",
+      university: "McGill University",
+    },
+    {
+      program: '"engineering montreal"',
+      university: "Search Result",
+    },
+    {
+      university_id: "ubc",
+      program: "Kinesiology",
+      university: "University of British Columbia",
+    },
+    {
+      university_id: "u_waterloo",
+      program: "Bioinformatics",
+      university: "University of Waterloo",
+    },
+  ]
+
   return (
     <div className="space-y-6">
       <h1 className="text-4xl font-bold text-[#191919]">Hello, {user?.name.split(" ")[0]}</h1>
@@ -249,88 +338,7 @@ export default function Dashboard() {
   )
 }
 
-const deadlines = [
-  {
-    university_id: "ubc",
-    details: "UBC Engineering supplementary application due",
-    date: "2025-04-15", // ISO format: YYYY-MM-DD
-  },
-  {
-    university_id: "u_calgary",
-    details: "Submit official transcripts to U of Calgary Admissions Office",
-    date: "2025-05-01",
-  },
-  {
-    university_id: "mcgill",
-    details: "McGill residence application priority deadline",
-    date: "2025-03-17",
-  },
-  {
-    university_id: "u_of_t",
-    details: "UofT scholarship application documents due",
-    date: "2025-03-28",
-  },
-  {
-    university_id: "u_waterloo",
-    details: "Waterloo's major admission award application due",
-    date: "2025-03-29",
-  }
-]
 
-const messages = [
-  {
-    avatar: "/avatar1.png",
-    name: "Michael Dry",
-    content: "My main advice would be to make it personal and specific — don’t just list achievements, but show how they’ve shaped you. Universities love to see your passion, unique experiences, and how you think.",
-    time: "7h",
-  },
-  {
-    avatar: "/avatar2.png",
-    name: "Vanessa Hu",
-    content: "Replied to your thread in UBC Housing",
-    time: "1h",
-  },
-]
-
-const applications = [
-  {
-    university_id: "mcgill",
-    program: "Software Engineering",
-    university: "McGill University",
-  },
-  {
-    university_id: "u_calgary",
-    program: "Electrical Engineering",
-    university: "University of Calgary",
-  },
-  {
-    university_id: "ubc",
-    program: "Integrated Sciences",
-    university: "University of British Columbia",
-  },
-]
-
-const saved = [
-  {
-    university_id: "mcgill",
-    program: "Life Sciences",
-    university: "McGill University",
-  },
-  {
-    program: '"engineering montreal"',
-    university: "Search Result",
-  },
-  {
-    university_id: "ubc",
-    program: "Kinesiology",
-    university: "University of British Columbia",
-  },
-  {
-    university_id: "u_waterloo",
-    program: "Bioinformatics",
-    university: "University of Waterloo",
-  },
-]
 
 
 

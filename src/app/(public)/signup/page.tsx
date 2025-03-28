@@ -97,7 +97,8 @@ export default function SignUpPage() {
           // Redirect based on whether it's a new or existing user
           if (response.status === 201) {
             // New user - redirect to setup
-            router.push('/setup');
+            // ! change back to /setup
+            router.push('/dashboard');
           } else {
             // Existing user - redirect to dashboard
             router.push('/dashboard');
@@ -170,7 +171,8 @@ export default function SignUpPage() {
           setUser(userData);
           if (response.status === 201) {
             // New user - redirect to setup
-            router.push('/setup');
+            // ! change back to /setup
+            router.push('/dashboard');
           } else {
             // Existing user - redirect to dashboard
             router.push('/dashboard');
