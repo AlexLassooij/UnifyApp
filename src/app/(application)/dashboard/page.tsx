@@ -15,6 +15,19 @@ import styles from './styles.module.css'
 export default function Dashboard() {
   const { user } = useUserStore()
 
+  const getDeadlineText = (days: number): string => {
+    switch (true) {
+      case days < 0:
+        return "!\nLate";
+      case days === 0:
+        return "0 Days";
+      case days === 1:
+        return "1 Day";
+      default:
+        return `${days} Days`;
+    }
+  };
+
   return (
     <div className="space-y-6">
       <h1 className="text-4xl font-bold text-[#191919]">Hello, {user?.name.split(" ")[0]}</h1>
@@ -58,7 +71,7 @@ export default function Dashboard() {
                     <div className="flex justify-between items-center gap-3 text-center self-end ">
                       <p className="text-sm">{formattedDate}</p>
                       <p className={`text-sm ${daysLeft <= 7 ? 'text-red-500' : 'text-amber-500'} w-8`}>
-                        {daysLeft} Days
+                        {getDeadlineText(daysLeft)}                      
                       </p>
                     </div>
                   </div>
@@ -245,12 +258,12 @@ const deadlines = [
   {
     university_id: "u_calgary",
     details: "Submit official transcripts to U of Calgary Admissions Office",
-    date: "2025-04-01",
+    date: "2025-05-01",
   },
   {
     university_id: "mcgill",
     details: "McGill residence application priority deadline",
-    date: "2025-04-17",
+    date: "2025-03-17",
   },
   {
     university_id: "u_of_t",
@@ -260,7 +273,7 @@ const deadlines = [
   {
     university_id: "u_waterloo",
     details: "Waterloo's major admission award application due",
-    date: "2025-03-30",
+    date: "2025-03-29",
   }
 ]
 

@@ -42,7 +42,7 @@
 //       program_id: '2',
 //       status: 'not_started' as ApplicationStatus,
 //       university: 'University of Toronto',
-//       program: 'Data Science',
+//       program: 'Comput Science',
 //       application_date: new Date("2024-02-15"),
 //       application_deadline: new Date("2024-03-15"),
 //       last_updated: new Date("2024-02-28"),
@@ -214,6 +214,200 @@
 //             { "text": "Interdisciplinary program combining statistics, computer science, and domain expertise" },
 //             { "text": "Hands-on experience with real-world data sets" },
 //             { "text": "Research opportunities with faculty" }
+//           ]
+//         }
+//       ],
+//       "is_new": true
+//     },
+//     {
+//       "id": "waterloo_computer_engineering",
+//       "university_id": "u_waterloo",
+//       "university_name": "University of Waterloo",
+//       "university_location": "Waterloo, ON",
+//       "faculty": "engineering",
+//       "program_name": "Computer Engineering",
+//       "degree_type": "Bachelor of Applied Science",
+//       "annual_tuition": 8900,
+//       "program_length": 5,
+//       "specializations": [
+//         { "name": "Embedded Systems", "link": "/programs/waterloo-ce-embedded" },
+//         { "name": "Digital Hardware", "link": "/programs/waterloo-ce-hardware" },
+//         { "name": "Software Systems", "link": "/programs/waterloo-ce-systems" }
+//       ],
+//       "program_description": [
+//         {
+//           "text": "The Computer Engineering program at Waterloo integrates hardware and software design, combining elements of electrical engineering and computer science."
+//         },
+//         {
+//           "subheading": "Co-op Education",
+//           "text": "Includes six 4-month co-op work terms alternating with academic terms, providing valuable industry experience."
+//         }
+//       ],
+//       "language_of_instruction": "English",
+//       "program_requirements": ["english", "math_calculus", "physics", "chemistry"],
+//       "specific_requirements": [
+//         {
+//           "curriculum_type": "ON",
+//           "requirements": [
+//             { "text": "English 4U" }, 
+//             { "text": "Advanced Functions 4U" }, 
+//             { "text": "Calculus and Vectors 4U" }, 
+//             { "text": "Chemistry 4U" }, 
+//             { "text": "Physics 4U" }
+//           ]
+//         }
+//       ],
+//       "application_deadline": [
+//         {
+//           "type": "early_admission",
+//           "date": "2023-12-15T00:00:00.000Z",
+//           "description": "Early admission deadline"
+//         },
+//         {
+//           "type": "regular_admission",
+//           "date": "2024-02-01T00:00:00.000Z",
+//           "description": "Regular admission deadline"
+//         }
+//       ],
+//       "career_opportunities": [
+//         {
+//           "text": "Graduates find roles as hardware engineers, software developers, embedded systems designers, and systems architects."
+//         }
+//       ],
+//       "tldr": [
+//         {
+//           "subheading": "Program Highlights",
+//           "bullets": [
+//             { "text": "World-renowned co-op program with 2+ years of paid work experience" },
+//             { "text": "Balanced curriculum covering both hardware and software" },
+//             { "text": "94% employment rate within six months of graduation" }
+//           ]
+//         }
+//       ],
+//       "is_new": false
+//     },
+//     {
+//       "id": "queens_commerce",
+//       "university_id": "queens",
+//       "university_name": "Queen's University",
+//       "university_location": "Kingston, ON",
+//       "faculty": "business",
+//       "program_name": "Commerce",
+//       "degree_type": "Bachelor of Commerce",
+//       "annual_tuition": 17500,
+//       "program_length": 4,
+//       "specializations": [
+//         { "name": "Finance", "link": "/programs/queens-commerce-finance" },
+//         { "name": "Marketing", "link": "/programs/queens-commerce-marketing" },
+//         { "name": "Entrepreneurship", "link": "/programs/queens-commerce-entrepreneurship" }
+//       ],
+//       "program_description": [
+//         {
+//           "text": "Queen's Commerce is a leading undergraduate business program offering a comprehensive business education with specialized tracks and international exchange opportunities."
+//         }
+//       ],
+//       "language_of_instruction": "English",
+//       "program_requirements": ["english", "math_calculus"],
+//       "specific_requirements": [
+//         {
+//           "curriculum_type": "ON",
+//           "requirements": [
+//             { "text": "English 4U" }, 
+//             { "text": "Advanced Functions 4U" }, 
+//             { "text": "Optional: Calculus and Vectors 4U (recommended)" }
+//           ]
+//         }
+//       ],
+//       "application_deadline": [
+//         {
+//           "type": "regular_admission",
+//           "date": "2024-01-15T00:00:00.000Z",
+//           "description": "Application deadline"
+//         },
+//         {
+//           "type": "scholarship",
+//           "date": "2024-02-15T00:00:00.000Z",
+//           "description": "Personal Statement of Experience (PSE) deadline"
+//         }
+//       ],
+//       "career_opportunities": [
+//         {
+//           "text": "Graduates pursue careers in consulting, finance, marketing, and entrepreneurship with top employers globally."
+//         }
+//       ],
+//       "tldr": [
+//         {
+//           "subheading": "Key Differentiators",
+//           "bullets": [
+//             { "text": "Small cohort-based learning environment (500 students per year)" },
+//             { "text": "Strong alumni network in business and finance" },
+//             { "text": "International exchange options with over 100 partner schools" }
+//           ]
+//         }
+//       ],
+//       "is_new": false
+//     },
+//     {
+//       "id": "mcmaster_health_sciences",
+//       "university_id": "mcmaster",
+//       "university_name": "McMaster University",
+//       "university_location": "Hamilton, ON",
+//       "faculty": "health_sciences",
+//       "program_name": "Health Sciences",
+//       "degree_type": "Bachelor of Health Sciences",
+//       "annual_tuition": 7200,
+//       "program_length": 4,
+//       "specializations": [
+//         { "name": "Biomedical Sciences", "link": "/programs/mcmaster-bhsc-biomedical" },
+//         { "name": "Global Health", "link": "/programs/mcmaster-bhsc-global" },
+//         { "name": "Child Health", "link": "/programs/mcmaster-bhsc-child" }
+//       ],
+//       "program_description": [
+//         {
+//           "text": "McMaster's Health Sciences program offers an inquiry-based approach to learning about health, wellness, and the healthcare system."
+//         },
+//         {
+//           "subheading": "Teaching Philosophy",
+//           "text": "The program emphasizes problem-based learning, critical thinking, and collaborative approaches to complex health issues."
+//         }
+//       ],
+//       "language_of_instruction": "English",
+//       "program_requirements": ["english", "biology", "chemistry", "math_calculus"],
+//       "specific_requirements": [
+//         {
+//           "curriculum_type": "ON",
+//           "requirements": [
+//             { "text": "English 4U" }, 
+//             { "text": "Biology 4U" }, 
+//             { "text": "Chemistry 4U" }, 
+//             { "text": "One of: Advanced Functions 4U, Calculus and Vectors 4U, or Mathematics of Data Management 4U" }
+//           ]
+//         }
+//       ],
+//       "application_deadline": [
+//         {
+//           "type": "regular_admission",
+//           "date": "2024-01-15T00:00:00.000Z",
+//           "description": "Application deadline"
+//         },
+//         {
+//           "type": "scholarship",
+//           "date": "2024-02-01T00:00:00.000Z",
+//           "description": "Supplementary application deadline"
+//         }
+//       ],
+//       "career_opportunities": [
+//         {
+//           "text": "Graduates often pursue medicine, research, public health, health policy, or continue to graduate studies in health-related fields."
+//         }
+//       ],
+//       "tldr": [
+//         {
+//           "subheading": "Program Features",
+//           "bullets": [
+//             { "text": "Over 60% of graduates gain admission to medical schools" },
+//             { "text": "Unique inquiry-based curriculum with small class sizes" },
+//             { "text": "Research opportunities starting in first year" }
 //           ]
 //         }
 //       ],

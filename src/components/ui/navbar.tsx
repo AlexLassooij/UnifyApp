@@ -32,9 +32,9 @@ export function AppNavbar() {
   ];
 
   return (
-    <div className={`max-h-screen sticky top-0 overflow-y-auto flex flex-col justify-start pt-4 items-center ${isCollapsed ? 'min-w-12' : 'p-4 w-[192px] min-w-[142px]' } bg-[#c0dce9] transition-width duration-300 rounded-tr-2xl rounded-br-2xl`}>
+    <div className={`max-h-screen sticky top-0 overflow-y-auto flex flex-col justify-start pt-4 items-center ${isCollapsed ? 'min-w-12' : 'p-4 w-[192px] min-w-[142px]' } bg-[#c0dce9] transition-all ease-in-out duration-300 rounded-tr-2xl rounded-br-2xl`}>
       <div className={`flex items-center w-full ${isCollapsed ? 'justify-center' : 'justify-start'}`}>
-        <button onClick={() => setIsCollapsed(!isCollapsed)} className="flex justify-center items-center text-sm">
+        <button onClick={() => setIsCollapsed(!isCollapsed)} className="flex justify-center items-center text-sm font-medium transition-all ease-in-out duration-300">
           {isCollapsed ? <ChevronRight className="h-5 w-5" /> : <><ChevronLeft className="h-5 w-5"/><div>Collapse</div></>}
         </button>
       </div>
@@ -47,7 +47,7 @@ export function AppNavbar() {
               href={item.href}
               className={`flex flex-col items-center gap-3 py-3 w-full rounded-lg text-[#191919] hover:bg-white/50 transition-colors ${isCollapsed ? '' : 'px-16'} ${isActive ? 'bg-white/30' : ''} `}
             >
-              <item.icon className="h-5 w-5" />
+              <item.icon className="h-5 w-5 transition-all ease-in-out duration-300" />
               {!isCollapsed && <span>{item.name}</span>}
             </Link>
           );
@@ -64,7 +64,7 @@ export function PublicNavbar() {
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/brand/logo.svg"
+            src="/brand/logo_larger.svg"
             alt="Unify Logo"
             width={60}
             height={60}
