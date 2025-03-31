@@ -39,13 +39,35 @@ export interface UserGrade {
   completed: "in_progress" | "completed";
 }
 
+export type PreferenceData = {
+  preferredAcademics?: number
+  preferredCampusLife?: number
+  preferredFinancial?: number
+  preferredLocationAndSize?: number
+  preferredFieldOfInterest?: number
+  preferredResearchReputation?: number
+  preferredCoop?: number
+  preferredSize?: number
+  preferredProvince?: number
+  prefferedCampusSetting?: number
+  prefferedAthletics?: number
+  prefferedStudentClubs?: number
+  prefferedParty?: number
+  prefferedDiversity?: number
+  prefferedTuition?: number
+  prefferedFinancialAid?: number
+  prefferedHousing?: number
+}
+
 export interface User {
   id?: string;
   name: string;
   email: string;
   high_school: string;
+  currentGrade: string;
   curriculum: CurriculumType;
   province: Province;
+  graduationYear: string
   saved_programs: string[]; // FK, unique
   saved_universities: string[]; // FK, unique
   recommended_programs: string[]; // FK, unique
@@ -56,11 +78,28 @@ export interface User {
     program_id: string;
     score: number;
   }[];
+  preference_data?: PreferenceData;
 }
     
+export interface RecommendationScore {
+  field_of_study: number[]
+  research: number
+  coop: number
+  school_size: number
+  location: number
+  urban_rural: number
+  athletics: number
+  clubs: number
+  greek_life: number
+  diversity: number
+  tuition: number
+  financial_aid: number
+  housing: number
+}
+
 export interface University {
   id?: string;
-  univesity_name: string;
+  university_name: string;
   abbreviated_name: string;
   province: Province;
   location: string;
@@ -86,6 +125,7 @@ export interface University {
   strengths: SubheadingAndParagraph[] | SubheadingAndBulletPoints[];
   mental_health_resources: SubheadingAndParagraph[] | SubheadingAndBulletPoints[];
   homepage: string;
+  recommendation_scores?: RecommendationScore;
 }
 
 export interface Program {

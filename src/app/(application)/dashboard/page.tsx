@@ -36,7 +36,7 @@ export default function Dashboard() {
 
   const deadlines = [
     {
-      university_id: "ubc",
+      university_id: "university_of_british_columbia",
       details: "UBC Engineering supplementary application due",
       date: futureDate(18), // 18 days from today
     },
@@ -51,7 +51,7 @@ export default function Dashboard() {
       date: futureDate(14), // Today
     },
     {
-      university_id: "u_of_t",
+      university_id: "university_of_toronto",
       details: "UofT scholarship application documents due",
       date: futureDate(0), // 4 days ago
     },
@@ -89,7 +89,7 @@ export default function Dashboard() {
       university: "University of Calgary",
     },
     {
-      university_id: "ubc",
+      university_id: "university_of_british_columbia",
       program: "Integrated Sciences",
       university: "University of British Columbia",
     },

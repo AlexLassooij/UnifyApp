@@ -1,4 +1,4 @@
-import { GradeLetter, Province, CurriculumType, Subject, ApplicationStatus, ApplicationOutcome, FacultyTypeOption } from "../datamodel/datamodel";
+import { GradeLetter, Province, CurriculumType, Subject, ApplicationStatus, ApplicationOutcome, FacultyTypeOption } from "../types/datamodel/datamodel";
 
 export const provinceCities: Record<Exclude<Province, "none">, string[]> = {
   ON: ["Toronto", "Ottawa", "Hamilton", "London", "Kingston", "Waterloo", "Guelph"],

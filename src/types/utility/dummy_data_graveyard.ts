@@ -70,7 +70,7 @@
 //   export const PROGRAMS: Program[] = [
 //     {
 //       "id": "u_of_t_computer_science",
-//       "university_id": "u_of_t",
+//       "university_id": "university_of_toronto",
 //       "university_name": "University of Toronto",
 //       "university_location": "Toronto, ON",
 //       "faculty": "science",
@@ -171,7 +171,7 @@
 //     },
 //     {
 //       "id": "ubc_science",
-//       "university_id": "ubc",
+//       "university_id": "university_of_british_columbia",
 //       "university_name": "University of British Columbia",
 //       "university_location": "Vancouver, BC",
 //       "faculty": "science",

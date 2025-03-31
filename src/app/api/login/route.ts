@@ -37,6 +37,8 @@ export async function POST(request: Request) {
         high_school: '',
         curriculum: "AB", // ! only temporary until we allow users to select province
         province: "AB",
+        currentGrade: "12",
+        graduationYear: "2025",
         saved_programs: [],
         saved_universities: [],
         recommended_programs: [],

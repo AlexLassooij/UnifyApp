@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { University, } from "@/types/datamodel/datamodel"
 import { SubheadingAndBulletPoints } from "@/types/utility/text_types"
-import { getSubjectDisplayName } from "@/types/utility/label_mappings"
+import { getSubjectDisplayName } from "@/lib/label_mappings"
 // Sample hard-coded university data
 const UNIVERSITIES: University[] = [
   {

@@ -17,8 +17,8 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 
-export function AppNavbar() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+export function AppNavbar({ defaultIsCollapsed = false }) {
+  const [isCollapsed, setIsCollapsed] = useState(defaultIsCollapsed);
   const pathname = usePathname();
 
   const navigation = [
@@ -56,6 +56,19 @@ export function AppNavbar() {
     </div>
   );
 };
+
+export function AppNavbarWrapper() {
+  const pathname = usePathname()
+
+  // Define paths that should show the navbar (public routes)
+  const isOnboardingRoute = pathname.includes("/onboarding")
+
+
+  // Only render the navbar on public routes
+  // if (isOnboardingRoute) return null
+
+  return <AppNavbar defaultIsCollapsed={isOnboardingRoute}/>
+}
 
 
 export function PublicNavbar() {
@@ -108,7 +121,7 @@ export function PublicNavbar() {
   )
 }
 
-export default function NavbarWrapper() {
+export function PublicNavbarWrapper() {
 
   const publicRoutes = ["/", "/login", "/signup", "/about", "/testimonials", "/students", "/parents"]
   const pathname = usePathname()

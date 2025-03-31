@@ -37,97 +37,98 @@ def get_user_preferences():
 # Helper function to match attributes
 def match_attribute(user_value, uni_value):
     """Match the attribute values of the user and university and return a score from 0 to 5."""
-    if user_value == uni_value:
-        return 5
-    elif abs(user_value - uni_value) == 1:
-        return 4
-    elif abs(user_value - uni_value) == 2:
-        return 3
-    elif abs(user_value - uni_value) == 3:
-        return 2
-    elif abs(user_value - uni_value) == 4:
-        return 1
-    else:
-        return 0
+    # if user_value == uni_value:
+    #     return 5
+    # elif abs(user_value - uni_value) == 1:
+    #     return 4
+    # elif abs(user_value - uni_value) == 2:
+    #     return 3
+    # elif abs(user_value - uni_value) == 3:
+    #     return 2
+    # elif abs(user_value - uni_value) == 4:
+    #     return 1
+    # else:
+    #     return 0
+    return 5 - abs(user_value - uni_value)  # Return a score from 0 to 5 based on the difference
 
 # Function to evaluate universities based on user preferences
 def evaluate_universities(preferences):
     # Predefined university data (hardcoded attributes)
     universities = {
-        "University of Toronto": {
-            "field_of_study": [1, 3, 6],  # STEM
-            "research": 5,        # Excellent research
-            "coop": 4,            # Strong co-op
-            "school_size": 4,     # Extra-Large (40,000+)
-            "location": 1,        # Ontario
-            "urban_rural": 1,     # Urban
-            "athletics": 3,       # Moderate importance of athletics
-            "clubs": 5,           # Strong student clubs
-            "greek_life": 4,      # Moderate Greek life
-            "diversity": 5,       # Very diverse
-            "tuition": 3,         # >$20,000
-            "financial_aid": 2,   # Moderate financial aid
-            "housing": 1          # On-campus
+         "University of Toronto": {
+            "field_of_study": [1, 3, 6],
+            "research": 5,
+            "coop": 4,
+            "school_size": 4,
+            "location": 1,
+            "urban_rural": 1,
+            "athletics": 3,
+            "clubs": 5,
+            "greek_life": 4,
+            "diversity": 5,
+            "tuition": 3,
+            "financial_aid": 2,
+            "housing": 1
         },
         "University of British Columbia": {
-            "field_of_study": [1, 2, 3, 6],  # STEM
-            "research": 4,        # Very good research
-            "coop": 4,            # Strong co-op
-            "school_size": 4,     # Extra-Large (40,000+)
-            "location": 2,        # British Columbia
-            "urban_rural": 2,     # Suburban
-            "athletics": 4,       # Very important athletics
-            "clubs": 4,           # Strong student clubs
-            "greek_life": 3,      # Moderate Greek life
-            "diversity": 4,       # Diverse
-            "tuition": 2,         # $10,000-$20,000
-            "financial_aid": 4,   # Strong financial aid
-            "housing": 1          # On-campus
+            "field_of_study": [1, 2, 3, 6],
+            "research": 4,
+            "coop": 4,
+            "school_size": 4,
+            "location": 2,
+            "urban_rural": 2,
+            "athletics": 4,
+            "clubs": 4,
+            "greek_life": 3,
+            "diversity": 4,
+            "tuition": 2,
+            "financial_aid": 4,
+            "housing": 1
         },
         "McGill University": {
-            "field_of_study": [1, 2, 6],  # STEM
-            "research": 5,        # Excellent research
-            "coop": 3,            # Good co-op
-            "school_size": 3,     # Large (15,000-40,000)
-            "location": 3,        # Quebec
-            "urban_rural": 1,     # Urban
-            "athletics": 3,       # Moderate importance of athletics
-            "clubs": 5,           # Strong student clubs
-            "greek_life": 3,      # Moderate Greek life
-            "diversity": 4,       # Diverse
-            "tuition": 2,         # $10,000-$20,000
-            "financial_aid": 3,   # Moderate financial aid
-            "housing": 2          # Off-campus
+            "field_of_study": [1, 2, 6],
+            "research": 5,
+            "coop": 3,
+            "school_size": 3,
+            "location": 3,
+            "urban_rural": 1,
+            "athletics": 3,
+            "clubs": 5,
+            "greek_life": 3,
+            "diversity": 4,
+            "tuition": 2,
+            "financial_aid": 3,
+            "housing": 2
         },
         "University of Waterloo": {
-            "field_of_study": [1],  # STEM
-            "research": 4,        # Very good research
-            "coop": 5,            # Excellent co-op
-            "school_size": 4,     # Extra-Large (40,000+)
-            "location": 1,        # Ontario
-            "urban_rural": 1,     # Urban
-            "athletics": 2,       # Low importance of athletics
-            "clubs": 4,           # Strong student clubs
-            "greek_life": 2,      # Low Greek life
-            "diversity": 4,       # Diverse
-            "tuition": 1,         # <$10,000
-            "financial_aid": 5,   # Excellent financial aid
-            "housing": 1          # On-campus
+            "field_of_study": [1],
+            "research": 4,
+            "coop": 5,
+            "school_size": 4,
+            "location": 1,
+            "urban_rural": 1,
+            "athletics": 2,
+            "clubs": 4,
+            "greek_life": 2,
+            "diversity": 4,
+            "tuition": 1,
+            "financial_aid": 5,
+            "housing": 1
         },
         "University of Alberta": {
-            "field_of_study": [1, 3],  # STEM
-            "research": 3,        # Good research
-            "coop": 4,            # Strong co-op
-            "school_size": 3,     # Large (15,000-40,000)
-            "location": 1,        # Alberta
-            "urban_rural": 2,     # Suburban
-            "athletics": 4,       # Very important athletics
-            "clubs": 3,           # Moderate student clubs
-            "greek_life": 4,      # Moderate Greek life
-            "diversity": 3,       # Moderate diversity
-            "tuition": 2,         # $10,000-$20,000
-            "financial_aid": 3,   # Moderate financial aid
-            "housing": 2          # Off-campus
+            "field_of_study": [1, 3],
+            "research": 3,
+            "coop": 4,
+            "school_size": 3,
+            "location": 1,
+            "urban_rural": 2,
+            "athletics": 4,
+            "clubs": 3,
+            "greek_life": 4,
+            "diversity": 3,
+            "tuition": 2,
+            "financial_aid": 3,
+            "housing": 2
         }
     }
 

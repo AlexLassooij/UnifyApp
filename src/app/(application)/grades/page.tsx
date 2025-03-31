@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 import { Course, UserGrade } from "@/types/datamodel/datamodel"
-import { PercentageToGPA, PercentageToGradeLetter } from "@/types/utility/label_mappings"
+import { PercentageToGPA, PercentageToGradeLetter } from "@/lib/label_mappings"
 import { useUserStore } from "@/store/userStore"
 
 // Interface for the data we display in the table

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import ProgramSearchResult from "@/components/ui/program-search-result"
-import { facultyTypes, provinceCities, provinceLabels } from "@/types/utility/label_mappings"
+import { facultyTypes, provinceCities, provinceLabels } from "@/lib/label_mappings"
 
 import { InstantSearch, Hits } from 'react-instantsearch';
 import { searchClient } from '@/firebase/clientApp';
