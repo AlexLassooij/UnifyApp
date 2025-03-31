@@ -2,22 +2,15 @@
 
 import Image from "next/image"
 import { ImageTextSection } from "@/components/screens/image_text_section"
+import { parentsData } from "@/lib/landing_page_data"
 
 export default function Parents() {
   return (
     <main className="flex flex-col">
-        <ImageTextSection
-            imageUrl="/landing/cartoon_chilling.png"
-            imageAlt="cartoons chilling"
-            title="Support your child’s future with confidence."
-            description="No more guesswork. Get the tools and insights you need to guide your child with ease."
-            imageOnLeft={true}
-            centerText={false}
-            imageHeight={350}
-            imageWidth={350}
-        />
-
-        <section className="hidden sm:block h-auto bg-white p-8">
+        {parentsData.map((section, index) => (
+            <>
+            {index === 1 && (
+            <section className="hidden sm:block h-auto bg-white p-8">
             <div className="h-full container mx-auto grid px-4 md:px-6 justify-center items-center">
                 <Image
                     src="/landing/testimonial.png"
@@ -28,38 +21,34 @@ export default function Parents() {
                 />
             </div>
         </section>
-        <ImageTextSection
-            imageUrl="/landing/girl_cap_up.png"
-            imageAlt="girl_graduating"
-            title="Know What They Need — Before They Need It."
-            description="Get personalized recommendations for schools and programs based on your child’s goals, interests, and grades."
-            imageOnLeft={false}
-            centerText={false}
-            imageHeight={300}
-            imageWidth={350}
-        />
-
-        <ImageTextSection
-            imageUrl="/landing/laptop_aerial.png"
-            imageAlt="laptop_aerial"
-            title="Smart Planning, Family Budget Approved."
+            )}
+            <ImageTextSection
+            key={`parent-section-${index}`}
+            imageUrl={section.imageUrl}
+            imageAlt={section.imageAlt}
+            title={section.title}
             description={
-            <>
-                <p className="mb-4">Private consultants can cost hundreds — even thousands — for the same guidance.</p>  
-                <p className="mb-4">Unify gives you expert-backed tools in one affordable, self-guided platform.</p>
-                <p className="mb-4">Why pay $200/hour when you can access smarter planning, built with the same insight and more transparency?</p>
-                <p>Unify helps families stay informed and on budget — no compromises, no confusion.</p>
-            </>
+                Array.isArray(section.description) ? (
+                <>
+                    {section.description.map((paragraph, pIndex) => (
+                    <p key={`paragraph-${index}-${pIndex}`} className={pIndex < section.description.length - 1 ? "mb-4" : ""}>
+                        {paragraph}
+                    </p>
+                    ))}
+                </>
+                ) : (
+                section.description
+                )
             }
-            imageOnLeft={true}
-            centerText={false}
-            imageHeight={600}
-            imageWidth={400}
-            maxWidth="max-w-[600px] lg:max-w-[800px]"
-        />
-        
-    
-
+            imageOnLeft={section.imageOnLeft}
+            centerText={section.centerText}
+            imageHeight={section.imageHeight}
+            imageWidth={section.imageWidth}
+            maxWidth={section.maxWidth}
+            backgroundColor={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+            />
+        </>
+      ))}
     </main>
   )
 }

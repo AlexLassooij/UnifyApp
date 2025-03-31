@@ -2,9 +2,9 @@
 
 import Image from "next/image"
 import { ImageTextSection } from "@/components/screens/image_text_section"
-import { testimonialData } from "@/lib/team_data"
+import { testimonialData } from "@/lib/landing_page_data"
 
-export default function Parents() {
+export default function Testimonials() {
   return (
     <main className="flex flex-col">
         <ImageTextSection

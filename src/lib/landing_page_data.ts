@@ -67,6 +67,57 @@ export interface TeamData {
     },
   ]
 
+  export interface ParentSection {
+    imageUrl: string;
+    imageAlt: string;
+    title: string;
+    description: string | string[];
+    imageOnLeft: boolean;
+    centerText: boolean;
+    imageHeight?: number;
+    imageWidth?: number;
+    maxWidth?: string;
+  }
+  
+  export const parentsData: ParentSection[] = [
+    {
+      imageUrl: "/landing/cartoon_chilling.png",
+      imageAlt: "cartoons chilling",
+      title: "Support your child's future with confidence.",
+      description: "No more guesswork. Get the tools and insights you need to guide your child with ease.",
+      imageOnLeft: true,
+      centerText: false,
+      imageHeight: 350,
+      imageWidth: 350
+    },
+    {
+      imageUrl: "/landing/girl_cap_up.png",
+      imageAlt: "girl_graduating",
+      title: "Know What They Need — Before They Need It.",
+      description: "Get personalized recommendations for schools and programs based on your child's goals, interests, and grades.",
+      imageOnLeft: false,
+      centerText: false,
+      imageHeight: 300,
+      imageWidth: 350
+    },
+    {
+      imageUrl: "/landing/laptop_aerial.png",
+      imageAlt: "laptop_aerial",
+      title: "Smart Planning, Family Budget Approved.",
+      description: [
+        "Private consultants can cost hundreds — even thousands — for the same guidance.",
+        "Unify gives you expert-backed tools in one affordable, self-guided platform.",
+        "Why pay $200/hour when you can access smarter planning, built with the same insight and more transparency?",
+        "Unify helps families stay informed and on budget — no compromises, no confusion."
+      ],
+      imageOnLeft: true,
+      centerText: false,
+      imageHeight: 600,
+      imageWidth: 400,
+      maxWidth: "max-w-[600px] lg:max-w-[800px]"
+    }
+  ];
+
   export interface Testimonial {
     category: string;
     imageUrl: string;

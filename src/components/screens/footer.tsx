@@ -8,7 +8,7 @@ import { Instagram, Facebook, Linkedin } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="bg-[#002f40] text-white py-12">
+    <footer className="bg-[#002f40] text-white py-12 rounded-tl-2xl rounded-tr-2xl">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* First Column - About */}

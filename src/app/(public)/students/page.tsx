@@ -5,7 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import Image from "next/image"
 import { ImageTextSection } from "@/components/screens/image_text_section"
-import { studentsData } from "@/lib/team_data"
+import { studentsData } from "@/lib/landing_page_data"
 
 export default function Students() {
   const [email, setEmail] = useState("")
