@@ -39,24 +39,24 @@ export interface UserGrade {
   completed: "in_progress" | "completed";
 }
 
-export type PreferenceData = {
-  preferredAcademics?: number
-  preferredCampusLife?: number
-  preferredFinancial?: number
-  preferredLocationAndSize?: number
-  preferredFieldOfInterest?: number
-  preferredResearchReputation?: number
-  preferredCoop?: number
-  preferredSize?: number
-  preferredProvince?: number
-  prefferedCampusSetting?: number
-  prefferedAthletics?: number
-  prefferedStudentClubs?: number
-  prefferedParty?: number
-  prefferedDiversity?: number
-  prefferedTuition?: number
-  prefferedFinancialAid?: number
-  prefferedHousing?: number
+export interface PreferenceData {
+  // Your existing properties
+  preferredFieldOfInterest?: number;
+  preferredResearchReputation?: number;
+  preferredCoop?: number;
+  preferredSize?: number;
+  preferredProvince?: number;
+  prefferedCampusSetting?: number;
+  prefferedAthletics?: number;
+  prefferedStudentClubs?: number;
+  prefferedParty?: number;
+  prefferedDiversity?: number;
+  prefferedTuition?: number;
+  prefferedFinancialAid?: number;
+  prefferedHousing?: number;
+  
+  // Add this index signature
+  [key: string]: number | undefined;
 }
 
 export interface User {

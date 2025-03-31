@@ -106,7 +106,7 @@ export default function Dashboard() {
       university: "Search Result",
     },
     {
-      university_id: "ubc",
+      university_id: "university_of_british_columbia",
       program: "Kinesiology",
       university: "University of British Columbia",
     },

@@ -21,7 +21,7 @@ export default function Landing() {
             </p>
             <div className="flex justify-center items-center">
               <Image
-                src="/brand/landing1.svg"
+                src="/landing/cartoon_1.svg"
                 alt="Student using dashboard"
                 width={300}
                 height={300}
@@ -66,7 +66,7 @@ export default function Landing() {
             <Card className="bg-white rounded-lg p-8">
               <CardContent className="p-0">
                 <Image
-                    src="/brand/landing2.svg"
+                    src="/landing/cartoon_2.svg"
                     alt="Student using dashboard"
                     width={300}
                     height={300}

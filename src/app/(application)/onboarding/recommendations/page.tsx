@@ -2,8 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
-import { Check, Circle, Bookmark } from "lucide-react"
+import { Check, Bookmark } from "lucide-react"
 import { useOnboarding } from "@/store/onboardingContext"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
@@ -61,7 +60,8 @@ export default function ResultsPage() {
           }
           const data = await response.json()
           console.debug(data)
-          data.recommended_universities.sort((a, b) => a.rank - b.rank)
+
+          data.recommended_universities.sort((a:UniversityRecommendation, b: UniversityRecommendation) => a.rank - b.rank)
           setResults(data.recommended_universities)
           
         } catch (error) {

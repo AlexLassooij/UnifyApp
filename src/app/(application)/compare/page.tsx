@@ -12,7 +12,7 @@ import { getSubjectDisplayName } from "@/lib/label_mappings"
 // Sample hard-coded university data
 const UNIVERSITIES: University[] = [
   {
-    univesity_name: "University of Toronto",
+    university_name: "University of Toronto",
     abbreviated_name: "UofT",
     province: "ON",
     location: "Toronto, Ontario",
@@ -130,7 +130,7 @@ const UNIVERSITIES: University[] = [
     homepage: "https://www.utoronto.ca",
   },
   {
-    univesity_name: "McGill University",
+    university_name: "McGill University",
     abbreviated_name: "McGill",
     province: "QC",
     location: "Montreal, Quebec",
@@ -222,7 +222,7 @@ const UNIVERSITIES: University[] = [
     homepage: "https://www.mcgill.ca",
   },
   {
-    univesity_name: "University of British Columbia",
+    university_name: "University of British Columbia",
     abbreviated_name: "UBC",
     province: "BC",
     location: "Vancouver, British Columbia",
@@ -372,7 +372,7 @@ export default function ComparePage() {
               <SelectContent>
                 {UNIVERSITIES.map((university) => (
                   <SelectItem key={university.abbreviated_name} value={university.abbreviated_name}>
-                    {university.univesity_name}
+                    {university.university_name}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -391,7 +391,7 @@ export default function ComparePage() {
                   <div className="flex items-center justify-center">
                     <School className="h-10 w-10 text-[#a78bfa]" />
                   </div>
-                  <h3 className="text-xl font-bold">{uni.univesity_name}</h3>
+                  <h3 className="text-xl font-bold">{uni.university_name}</h3>
                   <div className="flex items-center justify-center text-sm text-gray-600">
                     <MapPin className="h-4 w-4 mr-1" />
                     {uni.location}
