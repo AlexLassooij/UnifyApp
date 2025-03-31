@@ -4,13 +4,14 @@ import Image from "next/image"
 import Link from "next/link"
 import { ChevronRight } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import { ImageTextSection } from "@/components/screens/image_text_section"
 
 export default function Landing() {
   return (
     <main className="flex flex-col">
       {/* First screen */}
-      <section className="min-h-screen py-16 rounded-br-2xl rounded-bl-2xl z-10">
-        <div className="container mx-auto grid gap-8 px-6 md:px-4 md:grid-cols-2 items-center">
+      <section className="min-h-screen py-16 px-8 md:px-12 rounded-br-2xl rounded-bl-2xl z-10">
+        <div className="container mx-auto grid gap-8 md:grid-cols-2 items-center">
           <div className="space-y-6">
             <h1 className="text-4xl font-bold tracking-tight text-default sm:text-5xl md:text-6xl">
               Unify brings all the university information to you!
@@ -55,7 +56,7 @@ export default function Landing() {
       </section>
 
       {/* Second screen */}
-      <section className="min-h-screen bg-[#002f40] py-16 rounded-tr-2xl rounded-tl-2xl">
+      <section className="h-auto bg-[#002f40] py-16 px-8 md:px-12 rounded-2xl">
         <div className="container mx-auto grid gap-8 px-4 md:px-6 md:grid-cols-2 items-center">
           <div className="space-y-6">
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
@@ -70,12 +71,39 @@ export default function Landing() {
                     alt="Student using dashboard"
                     width={300}
                     height={300}
+                    className="max-w-[200px] lg:max-w-full h-auto"
                 />
               </CardContent>
             </Card>
           </div>
         </div>
       </section>
+
+      <ImageTextSection
+        imageUrl="/landing/did_not_know.png"
+        imageAlt="Person carrying boxes illustration"
+        title="Helping Students See What's Possible"
+        description="Too many students underestimate their future simply because they don't know what's within reach. Unify gives them the tools to realize their potential — and turn it into a plan."
+        imageOnLeft={true}
+        centerText={false}
+        paddingY="py-16 md:py-32"
+      />
+
+      <section className="h-auto py-16 p-8 md:px-12 bg-[#b3d1df] rounded-2xl">
+        <div className="h-full container mx-auto grid gap-8 lg:gap-16 px-4 md:px-6 justify-center items-center">
+          <Image
+            src="/landing/1_in8.png"
+            alt="Person carrying boxes illustration"
+            width={500}
+            height={500}
+            className="max-w-[400px] lg:max-w-full h-auto"
+            
+          />
+        </div>
+      </section>
+
+      
+      
     </main>
   )
 }

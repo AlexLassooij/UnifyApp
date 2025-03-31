@@ -121,7 +121,7 @@ export function PublicNavbar() {
   )
 }
 
-export function PublicNavbarWrapper() {
+export function PublicComponentWrapper({children}: Readonly<{children: React.ReactNode;}>) {
 
   const publicRoutes = ["/", "/login", "/signup", "/about", "/testimonials", "/students", "/parents"]
   const pathname = usePathname()
@@ -130,9 +130,9 @@ export function PublicNavbarWrapper() {
   const isPublicRoute = publicRoutes.includes(pathname)
 
   // Only render the navbar on public routes
-  if (!isPublicRoute) return null
+  if (!isPublicRoute) return <></>
 
-  return <PublicNavbar />
+  return <>{children ?? null}</>
 }
 
 

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { PublicNavbarWrapper } from "@/components/ui/navbar";
-
+import { PublicComponentWrapper, PublicNavbar } from "@/components/ui/navbar";
+import CallToActionPage from "@/components/screens/call_to_action"
+import Footer from "@/components/screens/footer"
 
 export const metadata: Metadata = {
   title: "Unify",
@@ -9,19 +10,22 @@ export const metadata: Metadata = {
   applicationName: "Unify Canada",
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({children}: Readonly<{children: React.ReactNode;}>) {
   return (
     <html lang="en">
       <body
         id="root-container"
         className={"antialiased bg-[#f3f3f3]"}
       >
-        <PublicNavbarWrapper/>
+        <PublicComponentWrapper>
+          <PublicNavbar />
+        </PublicComponentWrapper>
         {children}
+        <PublicComponentWrapper>
+          <CallToActionPage />
+          <Footer />
+        </PublicComponentWrapper>
+        
       </body>
     </html>
   );
