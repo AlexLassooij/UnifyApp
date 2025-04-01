@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { ArrowLeft, Calendar, Check, Plus, Trash2 } from "lucide-react"
 import Link from "next/link"
@@ -17,14 +17,18 @@ import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { Calendar as CalendarComponent } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Application, ApplicationStatus, Program } from "@/types/datamodel/datamodel"
+import { Application, ApplicationStatus } from "@/types/datamodel/datamodel"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog"
-import { APPLICATION_STATUSES } from "@/lib/application_status";
+// import { APPLICATION_STATUSES } from "@/lib/application_status";
 import { InstantSearch } from 'react-instantsearch';
 import { searchClient } from '@/firebase/clientApp';
 import { ProgramSearchDropdown } from "@/components/ui/program-search-dropdown"
-import { revalidatePath } from 'next/cache'
 
+export const APPLICATION_STATUSES = [
+  { value: "not_started" as ApplicationStatus, label: "Not Started", color: "bg-[#d9d9d9]", textColor: "text-[#191919]" },
+  { value: "in_progress" as ApplicationStatus, label: "In Progress", color: "bg-[#ffd866]", textColor: "text-[#8d5800]" },
+  { value: "completed" as ApplicationStatus, label: "Completed", color: "bg-[#ceead6]", textColor: "text-[#0d652d]" },
+] as const;
 // TODO disable manual fields if program is selected. change order of data to submit to reflect this properly
 // Define statuses as a constant outside the component
 
