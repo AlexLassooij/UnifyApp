@@ -24,16 +24,17 @@ import { InstantSearch } from 'react-instantsearch';
 import { searchClient } from '@/firebase/clientApp';
 import { ProgramSearchDropdown } from "@/components/ui/program-search-dropdown"
 
-export const APPLICATION_STATUSES = [
-  { value: "not_started" as ApplicationStatus, label: "Not Started", color: "bg-[#d9d9d9]", textColor: "text-[#191919]" },
-  { value: "in_progress" as ApplicationStatus, label: "In Progress", color: "bg-[#ffd866]", textColor: "text-[#8d5800]" },
-  { value: "completed" as ApplicationStatus, label: "Completed", color: "bg-[#ceead6]", textColor: "text-[#0d652d]" },
-] as const;
 // TODO disable manual fields if program is selected. change order of data to submit to reflect this properly
 // Define statuses as a constant outside the component
 
 
 export default function ApplicationTrackPage() {
+  const APPLICATION_STATUSES = [
+    { value: "not_started" as ApplicationStatus, label: "Not Started", color: "bg-[#d9d9d9]", textColor: "text-[#191919]" },
+    { value: "in_progress" as ApplicationStatus, label: "In Progress", color: "bg-[#ffd866]", textColor: "text-[#8d5800]" },
+    { value: "completed" as ApplicationStatus, label: "Completed", color: "bg-[#ceead6]", textColor: "text-[#0d652d]" },
+  ] as const;
+  
   const router = useRouter()
   const { user } = useUserStore()
   const [isSubmitting, setIsSubmitting] = useState(false)

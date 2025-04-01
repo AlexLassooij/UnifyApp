@@ -28,11 +28,7 @@ import { fetchUserApplications } from "@/lib/api/fetchers/applications";
 // TODO add programs data to DB, more unis, re-do app track page, support docs with link ?, adjust page to get data from DB, modify data when making edits (status, adding notes, subtasks)
 
 // had to put them back here, for some reason colours were not being loaded properly
-export const APPLICATION_STATUSES = [
-  { value: "not_started" as ApplicationStatus, label: "Not Started", color: "bg-[#d9d9d9]", textColor: "text-[#191919]" },
-  { value: "in_progress" as ApplicationStatus, label: "In Progress", color: "bg-[#ffd866]", textColor: "text-[#8d5800]" },
-  { value: "completed" as ApplicationStatus, label: "Completed", color: "bg-[#ceead6]", textColor: "text-[#0d652d]" },
-] as const;
+
 
 interface ApplicationRowProps {
   initialStatus: ApplicationStatus;
@@ -68,6 +64,12 @@ function ApplicationRow({
   onSubTaskChange,
   onDeadlineChange
 }: ApplicationRowProps) {
+  const APPLICATION_STATUSES = [
+    { value: "not_started" as ApplicationStatus, label: "Not Started", color: "bg-[#d9d9d9]", textColor: "text-[#191919]" },
+    { value: "in_progress" as ApplicationStatus, label: "In Progress", color: "bg-[#ffd866]", textColor: "text-[#8d5800]" },
+    { value: "completed" as ApplicationStatus, label: "Completed", color: "bg-[#ceead6]", textColor: "text-[#0d652d]" },
+  ] as const;
+
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<ApplicationStatus>(initialStatus);
   const [expanded, setExpanded] = useState(false);
