@@ -18,7 +18,7 @@ import {
 
 import { useRouter } from 'next/navigation';
 import { auth } from '@/firebase/clientApp';
-import { useAuth } from '@/store/authProvider';
+import { useAuth } from '@/lib/providers/authProvider';
 
 import { FcGoogle } from 'react-icons/fc';
 import { Eye, EyeOff } from "lucide-react"

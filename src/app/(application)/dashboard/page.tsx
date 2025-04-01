@@ -40,7 +40,7 @@ export default function Dashboard() {
         university_name: app.university_name,
         program_name: app.program_name,
         details: `${app.program_name} application deadline`,
-        date: app.application_date
+        date: app.application_deadline
       });
 
       if (app.sub_tasks.length > 0) {

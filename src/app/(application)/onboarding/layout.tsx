@@ -1,5 +1,5 @@
 import type React from "react"
-import { OnboardingProvider } from "@/store/onboardingContext"
+import { OnboardingProvider } from "@/lib/providers/onboardingContext"
 import OnboardingProgress from "@/components/ui/onboarding-progress"
 export default function OnboardingLayout({
   children,

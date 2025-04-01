@@ -1,7 +1,7 @@
 'use client'
 
 import { ImageTextSection } from "@/components/screens/image_text_section"
-import { testimonialData } from "@/lib/landing_page_data"
+import { testimonialData } from "@/lib/content_data/landing_page_data"
 
 export default function Testimonials() {
   return (

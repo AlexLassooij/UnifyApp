@@ -1,4 +1,4 @@
-// import { Application, ApplicationStatus, Program } from "../datamodel/datamodel";
+// import { Application, ApplicationStatus, Program } from "../../types/datamodel/datamodel";
 
 // export const dummy_applications: Application[] = [
 //     {
@@ -414,3 +414,100 @@
 //       "is_new": true
 //     }
 //   ];
+
+// Sample program data
+// const sampleProgram: Program = {
+//   id: "ubc_engineering",
+//   university_id: "university_of_british_columbia",
+//   university_name: "University of British Columbia",
+//   university_location: "Vancouver, BC",
+//   program_name: "Engineering",
+//   faculty: "engineering",
+//   degree_type: "Bachelor of Applied Science",
+//   annual_tuition: 8113,
+//   program_length: 4,
+//   specializations: [
+//     { name: "Biomedical Engineering", link: "/programs/ubc-biomedical-engineering" },
+//     { name: "Electrical Engineering", link: "/programs/ubc-electrical-engineering" },
+//     { name: "Computer Engineering", link: "/programs/ubc-computer-engineering" },
+//     { name: "Nanotechnology & Microsystems", link: "/programs/ubc-nanotechnology" },
+//     { name: "Electrical Energy Systems", link: "/programs/ubc-electrical-energy" },
+//   ],
+//   program_description: [
+//     {
+//       text: "Electrical Engineering consists of three eight-month academic sessions either following first year Engineering or following a transfer program from first year Science. The second year is common to both Electrical Engineering and Computer Engineering. Some undergraduate curriculum changes will emphasize laboratory work and engineering design, without detracting from the program's strong analytical base. You can select one of the following options: Biomedical Engineering, Nanotechnology & Microsystems, or Electrical Energy Systems, as well as a Minor in Honours Mathematics.",
+//     },
+//   ],
+//   language_of_instruction: "English",
+//   program_requirements: ["english", "math_calculus", "physics", "chemistry"],
+//   specific_requirements: [
+//     {
+//       curriculum_type: "AB",
+//       requirements: [
+//         { text: "PHYS 30" },
+//         { text: "CHEM 30" },
+//         { text: "MATH 31" },
+//         { text: "MATH 30-1" },
+//         { text: "ENGLISH 30-1" },
+//       ],
+//     },
+//   ],
+//   additional_requirements: [
+//     { text: "Personal Profile showcasing extracurricular activities, leadership, and community involvement" },
+//     { text: "Supplementary application for specific engineering disciplines may be required" },
+//   ],
+//   application_deadline: [
+//     {
+//       type: "early_admission",
+//       date: new Date("2023-12-01"),
+//       description: "Early Admission Deadline",
+//     },
+//     {
+//       type: "regular_admission",
+//       date: new Date("2024-01-31"),
+//       description: "Application Deadline",
+//     },
+//     {
+//       type: "scholarship",
+//       date: new Date("2023-12-01"),
+//       description: "Scholarship Application Deadline",
+//     },
+//   ],
+//   career_opportunities: [
+//     {
+//       subheading: "Industry Sectors",
+//       text: "Graduates work in diverse sectors including technology, construction, manufacturing, energy, transportation, and consulting.",
+//     },
+//     {
+//       subheading: "Job Roles",
+//       text: "Common roles include Design Engineer, Project Manager, Systems Engineer, Research and Development Engineer, and Technical Consultant.",
+//     },
+//     {
+//       subheading: "Further Education",
+//       text: "Many graduates pursue advanced degrees such as Master's or PhD in specialized engineering fields or MBA for management roles.",
+//     },
+//   ],
+//   tldr: [
+//     {
+//       subheading: "Program Highlights",
+//       bullets: [
+//         { text: "4-year Bachelor of Applied Science degree" },
+//         { text: "Common first year followed by specialization" },
+//         { text: "Co-op opportunities with 16-20 months of paid work experience" },
+//         { text: "Design-focused curriculum with hands-on projects" },
+//         { text: "Internationally recognized accreditation" },
+//       ],
+//     },
+//     {
+//       subheading: "Why Choose UBC Engineering",
+//       bullets: [
+//         { text: "Ranked among top 50 engineering programs globally" },
+//         { text: "Strong industry connections and employment outcomes" },
+//         { text: "State-of-the-art facilities and research opportunities" },
+//         { text: "Diverse student community with global perspectives" },
+//         { text: "Beautiful campus in Vancouver with excellent quality of life" },
+//       ],
+//     },
+//   ],
+//   is_new: false,
+// }

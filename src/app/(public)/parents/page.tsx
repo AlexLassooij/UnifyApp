@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { ImageTextSection } from "@/components/screens/image_text_section"
-import { parentsData } from "@/lib/landing_page_data"
+import { parentsData } from "@/lib/content_data/landing_page_data"
 
 export default function Parents() {
   return (

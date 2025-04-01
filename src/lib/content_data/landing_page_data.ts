@@ -59,12 +59,59 @@ export interface TeamData {
       name: "Alex Lassooij",
       title: "CTO",
       paragraphs: [
-        "Unify helped me discover programs I never would have considered on my own. The personalized recommendations were spot on for my interests and career goals.",
-        "The application timeline feature kept me organized and ahead of deadlines, which really reduced my stress levels during the whole process.",
-        "I'm now in my dream program, and I credit Unify with helping me find the perfect match for my academic goals and learning style."
+        "I’ve always been passionate about creating technology that makes a real difference in people’s lives. Having gone through the admissions process myself, I know that it can be overwhelming and confusing, leaving many students without the support they need to succeed. That’s what inspired me to build Unify—a platform designed to make expert guidance accessible to everyone.",
+        "As an Electrical Engineering & Data Science student at UBC with a background in designing user-facing applications and web development, I saw an opportunity to use technology to simplify and democratize the admissions journey. While the app is still in development, I’m excited to be creating something that has the potential to support and empower many younger students in the future."
       ],
       imageOnLeft: false
     },
+    {
+      imageUrl: "/landing/cindy.png",
+      imageAlt: "cindy",
+      name: "Cindy Tran",
+      title: "CFO",
+      paragraphs: [
+        "I'm an Accounting student at UBC Sauder and a passionate advocate for accessible education. Joining Unify as a CFO is a meaningful way for me to apply my financial expertise to a mission that empowers students, and I am dedicated to ensure our resources are effectively used to maximize Unify's reach.",
+        "Before joining Unify, I was a member in Bridges for Enterprise (BfE), a nonprofit that empowers early-stage social entrepreneurs. I also spent years building hands-on experience in the accounting, banking and finance sector - which equipped me with expertise to help bring Unify to the market.",
+        "At Unify, I'm committed to ensure our resources create meaningful impact, empowering students from all backgrounds to succeed."
+        ],
+      imageOnLeft: true
+    },
+    {
+      imageUrl: "/landing/brendan.png",
+      imageAlt: "brendan",
+      name: "Brendan Cooper",
+      title: "COO",
+      paragraphs: [
+        "I’m a Business student at UBC with a specialization in marketing and strategy. Having applied to universities in 2020, I saw first-hand the importance of having friends and family during the application process, and how those without such assistance can feel lost and overwhelmed.",
+        "To me, the need for this idea became clear when I saw how much people were spending on consultants, and how dangerous it can be if the application process becomes about who can spend more, rather than personal accomplishment and merit."
+        ],
+      imageOnLeft: false
+    },
+    {
+      imageUrl: "/landing/jasleen.png",
+      imageAlt: "jasleen",
+      name: "Jasleen Shnider",
+      title: "C-3PO",
+      paragraphs: [
+        "I’m an Integrated Engineering student at UBC, specializing in Computer and Mechanical Engineering with a minor in Entrepreneurship. My passion lies in making education accessible by giving students the support they need to level the playing field.",
+        "Having faced challenges during the university application process myself, I was struck by how little has changed when my younger brother went through it this year. Before Unify, I worked at UBC’s engineering outreach program and held leadership roles in my sorority that shaped my passion for mentorship and student success.",
+        "Today, I’m dedicated to building Unify, ensuring that every student has the opportunity to reach their full potential."
+        ],
+      imageOnLeft: true
+    },
+    {
+      imageUrl: "/landing/jolina.png",
+      imageAlt: "jolina",
+      name: "Jolina Cheng",
+      title: "CMO",
+      paragraphs: [
+        "I’m currently a UBC Commerce student specializing in Entrepreneurship, with a strong interest in digital marketing and brand development.",
+        "Prior to Unify, I gained experience managing social media accounts through student clubs and internships, focusing on content strategy and audience engagement.  Outside of academics, I enjoy exploring photography and video editing, these creative outlets allow me to express ideas visually. While I tend to be soft-spoken, I’ve found that digital media and design offer powerful ways to connect with others.",
+        "At Unify, I’m excited to contribute to a platform that empowers students through clear, accessible, and thoughtful communication."
+        ],
+      imageOnLeft: false
+    },
+    
   ]
 
   export interface ParentSection {

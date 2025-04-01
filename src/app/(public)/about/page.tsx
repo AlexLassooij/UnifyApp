@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { ImageTextSection } from "@/components/screens/image_text_section"
-import { teamData } from "@/lib/landing_page_data"
+import { teamData } from "@/lib/content_data/landing_page_data"
 export default function About() {
   return (
     <div className="min-h-screen flex flex-col">

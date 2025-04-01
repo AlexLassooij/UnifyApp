@@ -19,12 +19,13 @@ export async function POST(request: NextRequest) {
 
     // Format date objects for Firestore
     const formattedData = formatDateFields(programData);
-    
+    const { id, ...dataToSave } = formattedData;
+
     // Reference to the programs collection and specific document
     const programRef = doc(programsCollection, programData.id);
     
     // Add or update the program
-    setDoc(programRef, formattedData);
+    setDoc(programRef, dataToSave);
     
     return NextResponse.json(
       { message: 'Program added successfully', programId: programData.id },

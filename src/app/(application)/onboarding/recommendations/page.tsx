@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Check, Bookmark } from "lucide-react"
-import { useOnboarding } from "@/store/onboardingContext"
+import { useOnboarding } from "@/lib/providers/onboardingContext"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { useState, useEffect } from "react"

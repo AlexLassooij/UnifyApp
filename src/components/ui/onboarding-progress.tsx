@@ -1,6 +1,6 @@
 "use client"
 
-import { useOnboarding } from "@/store/onboardingContext"
+import { useOnboarding } from "@/lib/providers/onboardingContext"
 import { Progress } from "@/components/ui/progress"
 import { Check, Circle } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"

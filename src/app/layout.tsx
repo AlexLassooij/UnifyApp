@@ -3,7 +3,7 @@ import "./globals.css";
 import { PublicComponentWrapper, PublicNavbar } from "@/components/ui/navbar";
 import CallToActionPage from "@/components/screens/call_to_action"
 import Footer from "@/components/screens/footer"
-import { AuthProvider } from "@/store/authProvider";
+import { AuthProvider } from "@/lib/providers/authProvider";
 
 export const metadata: Metadata = {
   title: "Unify",

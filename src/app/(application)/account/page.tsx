@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { Separator } from "@/components/ui/separator"
 import { LogOut } from "lucide-react"
-import { useAuth } from "@/store/authProvider"
+import { useAuth } from "@/lib/providers/authProvider"
 
 export default function AccountPage() {
   const router = useRouter()

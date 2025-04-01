@@ -13,7 +13,7 @@ import { auth } from '@/firebase/clientApp';
 import { useUserStore } from '@/store/userStore';
 import { FcGoogle } from 'react-icons/fc';
 import { Eye, EyeOff } from 'lucide-react';
-import { useAuth } from "@/store/authProvider"
+import { useAuth } from "@/lib/providers/authProvider"
 
 export default function SignUpPage() {
   const [firstName, setFirstName] = useState('');
@@ -73,12 +73,11 @@ export default function SignUpPage() {
       const provider = new GoogleAuthProvider();
       const result: UserCredential = await signInWithPopup(auth, provider);
       const user = result.user;
-      const userEmail = user.email;
       const userName = user.displayName;
       
       const isNewUser = result.user.metadata.creationTime === result.user.metadata.lastSignInTime;
 
-      const { userData, status } = await syncUserWithAPI(result.user, { name: userName, signup: false });
+      const { userData, status } = await syncUserWithAPI(result.user, { name: userName, signup: true });
 
       if (status === 201 || isNewUser) {
         router.push('/onboarding/profile');
@@ -129,7 +128,7 @@ export default function SignUpPage() {
       const result: UserCredential = await createUserWithEmailAndPassword(auth, email, password);
       const userName = `${firstName} ${lastName}`;
 
-      const { userData, status } = await syncUserWithAPI(result.user, { name: userName, signup: false });
+      const { userData, status } = await syncUserWithAPI(result.user, { name: userName, signup: true });
 
       // should always be a 201 here
       if (status === 201) {

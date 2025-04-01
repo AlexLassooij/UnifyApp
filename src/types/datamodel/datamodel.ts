@@ -128,6 +128,12 @@ export interface University {
   recommendation_scores?: RecommendationScore;
 }
 
+export interface ProgramDeadline{
+  type: DeadlineType,
+  date: Date,
+  description: string
+}
+
 export interface Program {
   id?: string;
   university_id: string
@@ -150,11 +156,7 @@ export interface Program {
     requirements: ParagraphList
   }[];
   additional_requirements?: ParagraphList;
-  application_deadline: {
-    type: DeadlineType,
-    date: Date,
-    description: string
-  }[];
+  application_deadline: ProgramDeadline[];
   career_opportunities: SubheadingAndParagraph[];
   tldr: SubheadingAndBulletPoints[]
   is_new?: boolean // Added for UI display
@@ -171,7 +173,7 @@ export interface Application {
   id?: string;
   program_id: string;
   university_name: string;
-  university_id: string;
+  university_id: string
   program_name: string;
   status: ApplicationStatus;
   application_date: Date;
