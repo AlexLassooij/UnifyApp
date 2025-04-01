@@ -1,6 +1,5 @@
 'use client'
 
-import Image from "next/image"
 import { ImageTextSection } from "@/components/screens/image_text_section"
 import { testimonialData } from "@/lib/landing_page_data"
 
@@ -33,7 +32,7 @@ export default function Testimonials() {
             <>
               {testimonial.quotes.map((quote, quoteIndex) => (
                 <div key={`quote-${index}-${quoteIndex}`}>
-                  <p className="mb-0">"{quote.text}"</p>
+                  <p className="mb-0">&quot;{quote.text}&quot;</p>
                   <p className="mb-4">— {quote.author}</p>
                 </div>
               ))}

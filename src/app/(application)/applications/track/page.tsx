@@ -57,7 +57,6 @@ export default function ApplicationTrackPage() {
   })
 
   const handleProgramSelect = (program: { program_id: string, program_name: string, university_id: string, university_name: string }) => {
-    (program)
     setFormData(prev => ({ 
       ...prev, 
       program_id: program.program_id,
@@ -220,7 +219,7 @@ export default function ApplicationTrackPage() {
 
                   {/* If no program is found, allow manual entry */}
                   <div className="pt-4">
-                    <p className="text-sm text-gray-500 mb-4">Can't find your program? Enter details manually:</p>
+                    <p className="text-sm text-gray-500 mb-4">Can&apos;t find your program? Enter details manually:</p>
                   
                     <div className="space-y-2">
                       <Label htmlFor="university">University</Label>

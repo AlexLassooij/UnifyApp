@@ -7,7 +7,6 @@ import { ArrowRight, Calendar, Bookmark, MessageSquare, Files, ChevronRight, Sea
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
-import { format, differenceInDays, parseISO } from "date-fns";
 import { useUserStore } from "@/store/userStore"
 import { cn } from "@/lib/utils";
 import styles from './styles.module.css'
@@ -21,18 +20,6 @@ export default function Dashboard() {
   const { user } = useUserStore()
   const router = useRouter()
 
-  const getDeadlineText = (days: number): string => {
-    switch (true) {
-      case days < 0:
-        return "!\nLate";
-      case days === 0:
-        return "0 Days";
-      case days === 1:
-        return "1 Day";
-      default:
-        return `${days} Days`;
-    }
-  };
 
   const futureDate = (days: number): string => {
     const today = new Date();
@@ -44,8 +31,8 @@ export default function Dashboard() {
   const [subtaskDeadlines, setSubtaskDeadlines] = useState<DeadlineItemProps[]>([]);
 
   const createDeadlineItems = (applications: Application[]) => {
-    let subTaskItems: DeadlineItemProps[] = [];
-    let applicationItems: DeadlineItemProps[] = [];
+    const subTaskItems: DeadlineItemProps[] = [];
+    const applicationItems: DeadlineItemProps[] = [];
     applications.forEach((app) => {
       applicationItems.push({
         application_id: app.id ?? "unknown_id",

@@ -32,7 +32,7 @@ export default function About() {
           {/* Left Column */}
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-[#0a456c] leading-tight">
-              We're on a mission to make university guidance accessible, empowering, and equitable for every student.
+              We&apos;re on a mission to make university guidance accessible, empowering, and equitable for every student.
             </h2>
           </div>
 
@@ -44,13 +44,13 @@ export default function About() {
             </p>
 
             <p>
-              That's why we created Unify: a platform that simplifies admissions, offers expert-backed tools, and
+              That&apos;s why we created Unify: a platform that simplifies admissions, offers expert-backed tools, and
               supports students from all backgrounds.
             </p>
 
             <p>
               With team members who are transfer, international, and domestic students, we understand different journeys
-              — and we're here to help others find theirs.
+              — and we&apos;re here to help others find theirs.
             </p>
           </div>
         </div>

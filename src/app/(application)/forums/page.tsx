@@ -18,7 +18,7 @@ export default function ForumsPage() {
         <h1 className="text-4xl font-bold tracking-tight">Forums Coming Soon</h1>
         
         <p className="text-xl text-gray-600">
-          We're building a community space where students can connect, share experiences, and get answers.
+          We&apos;re building a community space where students can connect, share experiences, and get answers.
         </p>
 
         {/* Feature Cards */}
