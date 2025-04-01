@@ -7,7 +7,6 @@ export async function PATCH(request: NextRequest,{ params }: { params: Promise<{
       const { userId } = await params;
      
       const profileData = await request.json();
-      console.debug(profileData)
       
       const {
         name,

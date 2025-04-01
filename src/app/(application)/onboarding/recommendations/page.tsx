@@ -59,7 +59,7 @@ export default function ResultsPage() {
             throw new Error(`API error: ${response.status}`);
           }
           const data = await response.json()
-          console.debug(data)
+          // console.debug(data)
 
           data.recommended_universities.sort((a:UniversityRecommendation, b: UniversityRecommendation) => a.rank - b.rank)
           setResults(data.recommended_universities)

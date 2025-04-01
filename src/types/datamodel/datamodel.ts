@@ -170,8 +170,9 @@ export interface SubTask {
 export interface Application {
   id?: string;
   program_id: string;
-  university: string;
-  program: string;
+  university_name: string;
+  university_id: string;
+  program_name: string;
   status: ApplicationStatus;
   application_date: Date;
   application_deadline: Date;

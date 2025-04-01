@@ -31,6 +31,7 @@ export function AppNavbar({ defaultIsCollapsed = false }) {
     { name: "Account", href: "/account", icon: User },
   ];
 
+
   return (
     <div className={`max-h-screen sticky top-0 overflow-y-auto flex flex-col justify-start pt-4 items-center ${isCollapsed ? 'min-w-12' : 'p-4 w-[192px] min-w-[142px]' } bg-[#c0dce9] transition-all ease-in-out duration-300 rounded-tr-2xl rounded-br-2xl`}>
       <div className={`flex items-center w-full ${isCollapsed ? 'justify-center' : 'justify-start'}`}>
@@ -135,7 +136,20 @@ export function PublicComponentWrapper({children}: Readonly<{children: React.Rea
   return <>{children ?? null}</>
 }
 
+interface NavItemProps {
+  icon: React.ReactNode;
+  label: string;
+  active?: boolean;
+  href?: string;
+}
 
-
+function NavItem({ icon, label, active = false, href = "#" }: NavItemProps) {
+  return (
+    <Link href={href} className="flex flex-col items-center space-y-1">
+      <div className={cn("p-2", active ? "text-foreground" : "text-muted-foreground")}>{icon}</div>
+      <span className={cn("text-sm", active ? "font-medium" : "font-normal")}>{label}</span>
+    </Link>
+  );
+}
 
 

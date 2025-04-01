@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { doc, setDoc, Timestamp } from 'firebase/firestore';
+import { doc, setDoc, Timestamp, getDocs, collection, query, where } from 'firebase/firestore';
 import { Program } from '@/types/datamodel/datamodel';
 import { programsCollection } from '@/firebase/clientApp'
 
@@ -8,7 +8,6 @@ export async function POST(request: NextRequest) {
     // Parse the program data from the request body
     const programData: Program = await request.json();  
 
-    console.debug("PROGRAM DATA", programData)
     
     // Basic validation 
     if (!programData.id || !programData.university_id || !programData.program_name) {
@@ -43,38 +42,51 @@ export async function POST(request: NextRequest) {
 // export async function GET(request: NextRequest) {
 //   try {
 //     const { searchParams } = new URL(request.url);
-//     const facultyFilter = searchParams.get('faculty');
-//     const universityFilter = searchParams.get('university');
-//     const provinceFilter = searchParams.get('province');
+//     const namesOnly = searchParams.get('namesOnly') === 'true';
+//     const universityId = searchParams.get('universityId');
     
-//     let query = adminDb.collection('programs');
+//     // Create a reference to the programs collection
+//     const q = universityId 
+//       ? query(programsCollection, where("university_id", "==", universityId))
+//       : programsCollection;
     
-//     // Apply filters if provided
-//     if (facultyFilter) {
-//       query = query.where('faculty', '==', facultyFilter);
+//     // Get all documents from the programs collection
+//     const querySnapshot = await getDocs(q);
+    
+//     if (namesOnly) {
+//       // If namesOnly parameter is true, return only program names and IDs
+//       const programNames = [];
+//       querySnapshot.forEach((doc) => {
+//         const data = doc.data();
+//         programNames.push({
+//           id: doc.id,
+//           program_name: data.program_name,
+//           university_id: data.university_id,
+//           faculty: data.faculty || null
+//         });
+//       });
+      
+//       return NextResponse.json({ 
+//         programs: programNames,
+//         count: programNames.length
+//       });
+//     } else {
+//       // Return full program details
+//       const programs = [];
+//       querySnapshot.forEach((doc) => {
+//         const programData = doc.data() as Program;
+//         programs.push(formatProgramDates(programData));
+//       });
+      
+//       return NextResponse.json({ 
+//         programs,
+//         count: programs.length
+//       });
 //     }
-    
-//     if (universityFilter) {
-//       query = query.where('university_id', '==', universityFilter);
-//     }
-    
-//     if (provinceFilter) {
-//       query = query.where('university_location', '>=', provinceFilter)
-//                   .where('university_location', '<=', provinceFilter + '\uf8ff');
-//     }
-    
-//     const snapshot = await query.get();
-    
-//     const programs: Program[] = [];
-//     snapshot.forEach(doc => {
-//       programs.push(formatProgramDates(doc.data() as Program));
-//     });
-    
-//     return NextResponse.json({ programs });
 //   } catch (error) {
 //     console.error('Error fetching programs:', error);
 //     return NextResponse.json(
-//       { error: 'Failed to fetch programs', details: error.message },
+//       { error: 'Failed to fetch programs', details: (error as Error).message },
 //       { status: 500 }
 //     );
 //   }

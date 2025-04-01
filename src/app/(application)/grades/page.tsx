@@ -141,7 +141,7 @@ export default function GradesOverview() {
     } catch (error) {
       console.error("Failed to fetch grades:", error);
     } finally {
-      console.debug(grades)
+      // console.debug(grades)
       setIsLoadingGrades(false);
     }
   }

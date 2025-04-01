@@ -6,7 +6,7 @@ import { usersCollection } from "@/firebase/clientApp";
 
 
 export async function POST(request: Request) {
-  const { email, name, signup=false } = await request.json();
+  const { email, name="newUser", signup=false } = await request.json();
 
   if (!email) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -46,7 +46,6 @@ export async function POST(request: Request) {
         grades: [],
       };
       
-      console.debug(newUser)
       const docRef = await addDoc(usersCollection, newUser);
 
       return NextResponse.json({ ...newUser, id: docRef.id }, { status: 201 });          

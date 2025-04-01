@@ -21,48 +21,17 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ParagraphList } from "@/types/utility/text_types";
 import { useUserStore } from "@/store/userStore";
+import { APPLICATION_STATUSES } from "@/lib/application_status";
+import { fetchUserApplications } from "@/lib/api/fetchers/applications";
 // Import any database functions you need for updates
-// import { updateApplication } from "@/firebase/applications"; 
 
 // TODO add programs data to DB, more unis, re-do app track page, support docs with link ?, adjust page to get data from DB, modify data when making edits (status, adding notes, subtasks)
-// Define types at the top level
 
-// Define statuses as a constant outside the component
-const APPLICATION_STATUSES = [
-  { value: "not_started" as ApplicationStatus, label: "Not Started", color: "bg-[#d9d9d9]", textColor: "text-[#191919]" },
-  { value: "in_progress" as ApplicationStatus, label: "In Progress", color: "bg-[#ffd866]", textColor: "text-[#8d5800]" },
-  { value: "completed" as ApplicationStatus, label: "Completed", color: "bg-[#ceead6]", textColor: "text-[#0d652d]" },
-] as const;
-
-interface NavItemProps {
-  icon: React.ReactNode;
-  label: string;
-  active?: boolean;
-  href?: string;
-}
-
-// Memoize NavItem component since it doesn't have internal state
-function NavItem({ icon, label, active = false, href = "#" }: NavItemProps) {
-  return (
-    <Link href={href} className="flex flex-col items-center space-y-1">
-      <div className={cn("p-2", active ? "text-foreground" : "text-muted-foreground")}>{icon}</div>
-      <span className={cn("text-sm", active ? "font-medium" : "font-normal")}>{label}</span>
-    </Link>
-  );
-}
-
-
-
-// Update the ApplicationRowProps interface
-// interface ApplicationRowProps extends Omit<Application, 'program_id'> {
-//   selected: boolean
-//   onToggleSelect: (id: string) => void
-// }
 
 interface ApplicationRowProps {
   initialStatus: ApplicationStatus;
-  university: string;
-  program: string;
+  university_name: string;
+  program_name: string;
   deadline: Date;
   lastUpdated: Date;
   notes?: ParagraphList;
@@ -82,8 +51,8 @@ interface ApplicationRowProps {
 // Then update the ApplicationRow component
 function ApplicationRow({ 
   initialStatus, 
-  university, 
-  program, 
+  university_name, 
+  program_name, 
   deadline, 
   lastUpdated,
   notes = [],
@@ -124,7 +93,6 @@ function ApplicationRow({
   }, [editingNoteIndex]);
 
   const currentStatus = APPLICATION_STATUSES.find((s) => s.value === status) || APPLICATION_STATUSES[0];
-
   const handleStatusChange = (newStatus: ApplicationStatus) => {
     setStatus(newStatus);
     setOpen(false);
@@ -317,8 +285,8 @@ function ApplicationRow({
               </PopoverContent>
             </Popover>
           </div>
-          <div className="ml-2 col-span-3">{university}</div>
-          <div className="col-span-2">{program}</div>
+          <div className="ml-2 col-span-3">{university_name}</div>
+          <div className="col-span-2">{program_name}</div>
           {/* Make deadline clickable for calendar */}
           <div className="col-span-2">
             <Popover open={calendarOpen?.type === 'main' && calendarOpen.index === -1} onOpenChange={(isOpen) => {
@@ -669,96 +637,32 @@ export default function ApplicationsPage() {
   const { user } = useUserStore()
 
   useEffect(() => {
-    async function fetchApplications() {
-      try {
-        // const apps = await getApplications();
-        const response = await fetch(`/api/users/${user?.id}/applications`);
-    
-        if (!response.ok) {
-          throw new Error('Failed to fetch applications');
-        }
-        
-        const data = await response.json() || [];
-        const applications = data.applications || [];
-        setApplications(applications);
-      } catch (err: any) {
-        console.error("Error fetching applications:", err);
+    async function loadApplications() {
+      if (user?.id) {
+        const data = await fetchUserApplications(user.id);
+        console.debug(data)
+        setApplications(data);
       }
     }
-
-    fetchApplications();
+    loadApplications();
   }, [user?.id]);
 
 
-  const handleStatusChangeMain = async (index: number, newStatus: ApplicationStatus) => {
+  const handleApplicationUpdate = async <K extends keyof Application>(index: number, field: K, newValue: Application[K]) => {
     const app = applications[index];
     if (!app?.id) return;
-
+  
     const updatedApplications = [...applications];
     updatedApplications[index] = {
       ...updatedApplications[index],
-      status: newStatus,
+      [field]: newValue,
       last_updated: new Date()
     };
     
     setApplications(updatedApplications);
     
     await updateApplication(app.id, { 
-      status: newStatus
-    });
-  };
-
-  const handleNotesChangeMain = async (index: number, newNotes: ParagraphList) => {
-    const app = applications[index];
-    if (!app?.id) return;
-
-    const updatedApplications = [...applications];
-    updatedApplications[index] = {
-      ...updatedApplications[index],
-      notes: newNotes,
-      last_updated: new Date()
-    };
-    
-    setApplications(updatedApplications);
-
-    await updateApplication(app.id, { 
-      notes: newNotes
-    });
-  };
-
-  const handleSubTaskChangeMain = async (index: number, newSubTasks: any[]) => {
-    const app = applications[index];
-    if (!app?.id) return;
-
-    const updatedApplications = [...applications];
-    updatedApplications[index] = {
-      ...updatedApplications[index],
-      sub_tasks: newSubTasks,
-      last_updated: new Date()
-    };
-    
-    setApplications(updatedApplications);
-    
-    await updateApplication(app.id, { 
-      sub_tasks: newSubTasks
-    });
-  };
-
-  const handleDeadlineChangeMain = async (index: number, newDeadline: Date) => {
-    const app = applications[index];
-    if (!app?.id) return;
-
-    const updatedApplications = [...applications];
-    updatedApplications[index] = {
-      ...updatedApplications[index],
-      application_deadline: newDeadline,
-      last_updated: new Date()
-    };
-    
-    setApplications(updatedApplications);
-    
-    await updateApplication(app.id, { 
-      application_deadline: newDeadline
+      [field]: newValue
     });
   };
 
@@ -775,7 +679,6 @@ export default function ApplicationsPage() {
   // }
 
   async function updateApplication(appId: string, data: Partial<Application>): Promise<void> {
-    console.debug(`/api/users/${user?.id}/applications/${appId}`)
     const response = await fetch(`/api/users/${user?.id}/applications/${appId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
@@ -821,16 +724,16 @@ export default function ApplicationsPage() {
           <ApplicationRow
           key={index}
           initialStatus={app.status}
-          university={app.university}
-          program={app.program}
+          university_name={app.university_name}
+          program_name={app.program_name}
           deadline={app.application_deadline}
           lastUpdated={app.last_updated}
           notes={app.notes}
           subTasks={app.sub_tasks}
-          onStatusChange={(newStatus) => handleStatusChangeMain(index, newStatus)}
-          onNotesChange={(newNotes) => handleNotesChangeMain(index, newNotes)}
-          onSubTaskChange={(newSubTasks) => handleSubTaskChangeMain(index, newSubTasks)}
-          onDeadlineChange={(newDeadline) => handleDeadlineChangeMain(index, newDeadline)}
+          onStatusChange={(newStatus) => handleApplicationUpdate(index, 'status', newStatus)}
+          onNotesChange={(newNotes) => handleApplicationUpdate(index, 'notes', newNotes)}
+          onSubTaskChange={(newSubTasks) => handleApplicationUpdate(index, 'sub_tasks', newSubTasks)}
+          onDeadlineChange={(newDeadline) => handleApplicationUpdate(index, 'application_deadline', newDeadline)}
             />
           )
         }

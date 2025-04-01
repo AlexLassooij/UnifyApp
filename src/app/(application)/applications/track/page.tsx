@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { ArrowLeft, Calendar, Check, Plus, Trash2 } from "lucide-react"
 import Link from "next/link"
@@ -17,16 +17,17 @@ import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { Calendar as CalendarComponent } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Application, ApplicationStatus } from "@/types/datamodel/datamodel"
+import { Application, ApplicationStatus, Program } from "@/types/datamodel/datamodel"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog"
+import { APPLICATION_STATUSES } from "@/lib/application_status";
+import { InstantSearch } from 'react-instantsearch';
+import { searchClient } from '@/firebase/clientApp';
+import { ProgramSearchDropdown } from "@/components/ui/program-search-dropdown"
+import { revalidatePath } from 'next/cache'
 
 // TODO disable manual fields if program is selected. change order of data to submit to reflect this properly
 // Define statuses as a constant outside the component
-const APPLICATION_STATUSES = [
-  { value: "not_started" as ApplicationStatus, label: "Not Started", color: "bg-[#d9d9d9]", textColor: "text-[#191919]" },
-  { value: "in_progress" as ApplicationStatus, label: "In Progress", color: "bg-[#ffd866]", textColor: "text-[#8d5800]" },
-  { value: "completed" as ApplicationStatus, label: "Completed", color: "bg-[#ceead6]", textColor: "text-[#0d652d]" },
-] as const;
+
 
 export default function ApplicationTrackPage() {
   const router = useRouter()
@@ -34,19 +35,17 @@ export default function ApplicationTrackPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   
   // Basic application details
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Application>({
     program_id: "",
-    university: "",
-    program: "",
-    status: "not_started" as ApplicationStatus,
+    university_name: "",
+    university_id: "",
+    program_name: "",
+    status: "not_started",
+    application_date: new Date(),
     application_deadline: new Date(),
-    notes: [] as { text: string }[],
-    sub_tasks: [] as {
-      name: string;
-      status: ApplicationStatus;
-      deadline: Date;
-      notes: string;
-    }[]
+    notes: [],
+    sub_tasks: [],
+    last_updated: new Date(),
   })
 
   // Task management
@@ -56,6 +55,17 @@ export default function ApplicationTrackPage() {
     deadline: new Date(),
     notes: ""
   })
+
+  const handleProgramSelect = (program: { program_id: string, program_name: string, university_id: string, university_name: string }) => {
+    (program)
+    setFormData(prev => ({ 
+      ...prev, 
+      program_id: program.program_id,
+      program_name: program.program_name,
+      university_id: program.university_id,
+      university_name: program.university_name
+    }));
+  };
   
   // Note management
   const [noteText, setNoteText] = useState("")
@@ -155,30 +165,14 @@ export default function ApplicationTrackPage() {
     try {
       // Extract university and program if using program_id
       // In a real app, you would fetch this from your programs database
-      const programDetails = {
-        "prog1": { university: "McGill University", program: "Software Engineering" },
-        "prog2": { university: "University of Toronto", program: "Computer Science" },
-        "prog3": { university: "UBC", program: "Biology" },
-        "prog4": { university: "Queens University", program: "Political Science" }
-      }[formData.program_id] || { university: "", program: "" }
-
-      const dataToSubmit: Omit<Application, 'last_updated'> = {
-        program_id: formData.program_id,
-        university: formData.university || programDetails.university,
-        program: formData.program || programDetails.program,
-        status: formData.status,
-        application_date: new Date(),
-        application_deadline: formData.application_deadline,
-        notes: formData.notes,
-        sub_tasks: formData.sub_tasks,
-      }
+      
       
       const response = await fetch(`/api/users/${user?.id}/applications`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(dataToSubmit),
+        body: JSON.stringify(formData),
       })
 
       if (response.ok) {
@@ -216,53 +210,46 @@ export default function ApplicationTrackPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="program_id">Program</Label>
-                  <Select 
-                    name="program_id" 
-                    onValueChange={(value) => handleSelectChange("program_id", value)}
-                    required
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a program" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="prog1">Software Engineering - McGill University</SelectItem>
-                      <SelectItem value="prog2">Computer Science - University of Toronto</SelectItem>
-                      <SelectItem value="prog3">Biology - UBC</SelectItem>
-                      <SelectItem value="prog4">Political Science - Queens University</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                {/* Replace the existing program select with InstantSearch */}
+                <InstantSearch searchClient={searchClient} indexName="program-index">
+                    <ProgramSearchDropdown 
+                      onSelect={handleProgramSelect}
+                      placeholder="Search for a program"
+                    />
+                  </InstantSearch>
 
-                {/* Custom university and program inputs */}
-                <div className="space-y-2">
-                  <Label htmlFor="university">Or enter university name manually</Label>
-                  <Input
-                    name="university"
-                    placeholder="University name"
-                    value={formData.university}
-                    onChange={handleInputChange}
-                  />
-                </div>
+                  {/* If no program is found, allow manual entry */}
+                  <div className="pt-4">
+                    <p className="text-sm text-gray-500 mb-4">Can't find your program? Enter details manually:</p>
+                  
+                    <div className="space-y-2">
+                      <Label htmlFor="university">University</Label>
+                      <Input
+                        name="university"
+                        placeholder="University name"
+                        value={formData.university_name}
+                        onChange={handleInputChange}
+                      />
+                    </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="program">Program name</Label>
-                  <Input
-                    name="program"
-                    placeholder="Program name"
-                    value={formData.program}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="status">Status</Label>
-                  <Select 
-                    name="status" 
-                    defaultValue="not_started"
-                    onValueChange={(value) => handleSelectChange("status", value as ApplicationStatus)}
-                  >
+                    <div className="space-y-2 mt-2">
+                      <Label htmlFor="program">Program</Label>
+                      <Input
+                        name="program"
+                        placeholder="Program name"
+                        value={formData.program_name}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="status">Status</Label>
+                    <Select 
+                      name="status" 
+                      defaultValue="not_started"
+                      onValueChange={(value) => handleSelectChange("status", value as ApplicationStatus)}
+                    >
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>

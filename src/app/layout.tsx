@@ -3,6 +3,7 @@ import "./globals.css";
 import { PublicComponentWrapper, PublicNavbar } from "@/components/ui/navbar";
 import CallToActionPage from "@/components/screens/call_to_action"
 import Footer from "@/components/screens/footer"
+import { AuthProvider } from "@/store/authProvider";
 
 export const metadata: Metadata = {
   title: "Unify",
@@ -17,15 +18,16 @@ export default function RootLayout({children}: Readonly<{children: React.ReactNo
         id="root-container"
         className={"antialiased bg-[#f3f3f3]"}
       >
-        <PublicComponentWrapper>
-          <PublicNavbar />
-        </PublicComponentWrapper>
-        {children}
-        <PublicComponentWrapper>
-          <CallToActionPage />
-          <Footer />
-        </PublicComponentWrapper>
-        
+        <AuthProvider>
+          <PublicComponentWrapper>
+            <PublicNavbar />
+          </PublicComponentWrapper>
+          {children}
+          <PublicComponentWrapper>
+            <CallToActionPage />
+            <Footer />
+          </PublicComponentWrapper>
+        </AuthProvider>
       </body>
     </html>
   );

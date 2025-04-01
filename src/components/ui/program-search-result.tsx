@@ -51,17 +51,17 @@ export default function ProgramSearchResult({ hit }: { hit: any }) {
                     Match: 78%
                 </div>
                 <button
-                    onClick={() => saveProgram(hit.id)}
+                    onClick={() => saveProgram(hit.ObjectID)}
                     className="text-[#ffc107] hover:text-[#e0a800]"
                 >
-                    <Bookmark className="h-6 w-6" fill={savedPrograms.includes(hit.id) ? "#ffc107" : "none"} />
+                    <Bookmark className="h-6 w-6" fill={savedPrograms.includes(hit.ObjectID) ? "#ffc107" : "none"} />
                 </button>
             </div>
 
           <div className="text-xl font-medium mb-2">${hit.annual_tuition.toLocaleString()} / yr</div>
           {/* TODO : dont use manual margin here */}
           <Link
-            href={`/programs/${hit.id}`}
+            href={`/programs/${hit.ObjectID}`}
             className="mt-6 text-[#66757c] hover:text-[#191919] flex items-center"
           >
             View Program <ChevronRight className="h-4 w-4 ml-1" />

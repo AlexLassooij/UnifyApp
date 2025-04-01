@@ -353,7 +353,7 @@ export default function ComparePage() {
         ...prev,
         [section]: !prev[section],
     }))
-    console.debug(expandedSections)
+    // console.debug(expandedSections)
   }
 
   return (

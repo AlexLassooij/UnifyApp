@@ -13,6 +13,7 @@ import { auth } from '@/firebase/clientApp';
 import { useUserStore } from '@/store/userStore';
 import { FcGoogle } from 'react-icons/fc';
 import { Eye, EyeOff } from 'lucide-react';
+import { useAuth } from "@/store/authProvider"
 
 export default function SignUpPage() {
   const [firstName, setFirstName] = useState('');
@@ -31,7 +32,8 @@ export default function SignUpPage() {
   });
 
   const router = useRouter();
-  const { setUser } = useUserStore();
+  const { syncUserWithAPI } = useAuth();
+  
 
   const validateForm = () => {
     let isValid = true;
@@ -74,41 +76,20 @@ export default function SignUpPage() {
       const userEmail = user.email;
       const userName = user.displayName;
       
-      console.debug('User:', user);
-      if (userEmail) {
-        // Make API call to your login endpoint
-        const response = await fetch('/api/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: userEmail,
-            name: userName || 'User',
-            signup: true,
-          }),
-        });
-  
-        if (response.ok) {
-          const userData = await response.json();
-          console.debug('User data:', userData);
-          setUser(userData);
-          
-          // Redirect based on whether it's a new or existing user
-          if (response.status === 201) {
-            router.push('/onboarding/profile');
-          } else {
-            // Existing user - redirect to dashboard
-            router.push('/dashboard');
-          }
-          
-        } else if (response.status == 404) {
-          setEmailAlreadyInUse(true);
-          setError('E-mail already in use.');
-        } else {
-          console.error('Failed to register user with API');
-          setError('Failed to complete sign-in process.');
-        }
+      const isNewUser = result.user.metadata.creationTime === result.user.metadata.lastSignInTime;
+
+      const { userData, status } = await syncUserWithAPI(result.user, { name: userName, signup: false });
+
+      if (status === 201 || isNewUser) {
+        router.push('/onboarding/profile');
+      } else if (status === 200) {
+        router.push('/dashboard');
+      } else if (status == 404) {
+        setEmailAlreadyInUse(true);
+        setError('E-mail already in use.');
+      } else {
+        console.error('Failed to register user with API');
+        setError('Failed to complete sign-in process.');
       }
     } catch (error: any) {
       console.error('Error signing in with Google:', error);      
@@ -137,7 +118,7 @@ export default function SignUpPage() {
     return null
   };
 
-  const signInWithEmail = async () => {
+  const signUpWithEmail = async () => {
     if (!validateForm()) {
       return; // Stop if validation fails
     }
@@ -146,37 +127,18 @@ export default function SignUpPage() {
     setEmailAlreadyInUse(false);
     try {
       const result: UserCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = result.user;
-      const userEmail = user.email;
       const userName = `${firstName} ${lastName}`;
-      
-      if (email) {
-        // Make API call to your login endpoint
-        const response = await fetch('/api/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: userEmail,
-            name: userName || 'User',
-            signup: true,
-          }),
-        });
-  
-        if (response.ok) {
-          const userData = await response.json();
-          setUser(userData);
-          if (response.status === 201) {
-            router.push('/onboarding/profile');
-          } else {
-            // Existing user - redirect to dashboard
-            router.push('/dashboard');
-          }
-        } else {
-          setEmailAlreadyInUse(true);
-          setError('Failed to complete sign-in process.');
-        }
+
+      const { userData, status } = await syncUserWithAPI(result.user, { name: userName, signup: false });
+
+      // should always be a 201 here
+      if (status === 201) {
+        router.push('/onboarding/profile');
+      } else if (status === 200) {
+        router.push('/dashboard');
+      } else {
+        console.error('Failed to register user with API');
+        setError('Failed to complete sign-in process.');
       }
       // Redirect or update UI upon successful sign-in
     } catch (error: any) {
@@ -243,7 +205,7 @@ export default function SignUpPage() {
               <div className="space-y-8">
                   <form onSubmit={(e) => {
                     e.preventDefault();
-                    signInWithEmail();
+                    signUpWithEmail();
                   }}>
                     {/* Email and Password Inputs */}
                     <div className="space-y-4">

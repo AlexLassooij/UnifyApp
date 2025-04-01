@@ -21,7 +21,6 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
     const applicationsReformatted = snapshot.docs.map(doc => {
       const data = doc.data();
-      console.debug(data);
       // Convert Firestore timestamps to serializable format
       return {
         id: doc.id,
