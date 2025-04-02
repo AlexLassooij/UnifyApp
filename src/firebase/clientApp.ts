@@ -28,6 +28,7 @@ const usersCollection = collection(db, "users");
 const programsCollection = collection(db, "programs");
 const universitiesCollection = collection(db, "universities");
 const curriculaCollection = collection(db, "curricula");
+const notificationsCollection = collection(db, "notifications");
 
 
 
@@ -51,5 +52,6 @@ export {
   programsCollection,
   universitiesCollection,
   curriculaCollection,
+  notificationsCollection,
   searchClient
 };

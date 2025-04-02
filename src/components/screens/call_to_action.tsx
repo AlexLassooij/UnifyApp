@@ -7,16 +7,22 @@ import { Button } from "@/components/ui/button"
 import { Mail } from "lucide-react"
 import Image from "next/image"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { addNotification } from "@/lib/api/fetchers/call_to_action"
 
 export default function CallToActionPage() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
-  const [notification, setNotification] = useState("")
+  const [notification, setNotification] = useState("beta")
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log({ name, email, notification })
     // Handle form submission
+    if (!name || !email) {
+      console.error("Name and email are required")
+      return
+    }
+    addNotification(name, email, notification)
   }
 
   return (
@@ -45,7 +51,7 @@ export default function CallToActionPage() {
                   placeholder="Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full border-0 border-b border-gray-300 focus:border-[#9175e5] focus:ring-0 px-0 py-2 bg-transparent"
+                  className="w-full border-0 border-b border-gray-300 focus:border-purple-light focus:ring-0 px-0 py-2 bg-transparent"
                   required
                 />
               </div>
