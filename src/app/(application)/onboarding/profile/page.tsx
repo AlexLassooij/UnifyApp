@@ -16,6 +16,7 @@ function StudentProfilePage() {
 
     useEffect(() => {
         // Only set default values for fields that don't already have a value
+        // console.debug(profileData.name, user?.name)
         Object.entries(defaultProfile).forEach(([key, value]) => {
         // @ts-expect-error - Ignoring index signature error for preferenceData
           if (profileData[key] === undefined) {
@@ -115,7 +116,7 @@ function StudentProfilePage() {
                             <Input
                             id="firstName"
                             placeholder="Jane Doe"
-                            value={profileData.name || user?.name || ""}
+                            value={profileData.name || ""}
                             onChange={(e) => updateProfileData({ name: e.target.value })}
                             />
                         </div>
