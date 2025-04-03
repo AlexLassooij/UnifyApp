@@ -91,7 +91,7 @@ export interface TeamData {
       imageUrl: "/landing/jasleen.png",
       imageAlt: "jasleen",
       name: "Jasleen Shnider",
-      title: "C-3PO",
+      title: "CPO",
       paragraphs: [
         "I’m an Integrated Engineering student at UBC, specializing in Computer and Mechanical Engineering with a minor in Entrepreneurship. My passion lies in making education accessible by giving students the support they need to level the playing field.",
         "Having faced challenges during the university application process myself, I was struck by how little has changed when my younger brother went through it this year. Before Unify, I worked at UBC’s engineering outreach program and held leadership roles in my sorority that shaped my passion for mentorship and student success.",
